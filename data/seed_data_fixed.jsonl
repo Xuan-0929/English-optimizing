@@ -1,0 +1,54 @@
+{"error_sentence": "She told me she go to the beach last week.", "correct_sentence": "She told me she went to the beach last week.", "error_type": "时态一致", "explanation": "从句中的动词时态与主句不匹配。"}
+{"error_sentence": "I started to study when I hear the news.", "correct_sentence": "I started to study when I heard the news.", "error_type": "时态一致", "explanation": "从句中的动词时态应与主句的时态一致。"}
+{"error_sentence": "They were talking about an event that will happen tomorrow.", "correct_sentence": "They were talking about an event that would happen tomorrow.", "error_type": "时态一致", "explanation": "虚拟语气中时态不匹配，应为过去将来时。"}
+{"error_sentence": "While he was waiting, he often think about his childhood.", "correct_sentence": "While he was waiting, he often thought about his childhood.", "error_type": "时态一致", "explanation": "从句中的动词时态应与主句的过去进行时一致。"}
+{"error_sentence": "I have been learning English since I began to study last year.", "correct_sentence": "I have been learning English since I began studying last year.", "error_type": "时态一致", "explanation": "现在完成进行时与过去开始的动作时态不匹配。"}
+{"error_sentence": "When she was a child, she use to play soccer.", "correct_sentence": "When she was a child, she used to play soccer.", "error_type": "时态一致", "explanation": "表达过去的习惯性动作时，use应改为used。"}
+{"error_sentence": "If I knew the answer, I tell you.", "correct_sentence": "If I knew the answer, I would tell you.", "error_type": "时态一致", "explanation": "条件句中主句应使用虚拟语气，即过去时。"}
+{"error_sentence": "The teacher explained that the Earth revolve around the Sun.", "correct_sentence": "The teacher explained that the Earth revolves around the Sun.", "error_type": "时态一致", "explanation": "与事实相关的陈述句，动词应使用一般现在时。"}
+{"error_sentence": "She said she will meet us at the library.", "correct_sentence": "She said she would meet us at the library.", "error_type": "时态一致", "explanation": "间接引语中应使用过去将来时态。"}
+{"error_sentence": "The book who I read is very interesting.", "correct_sentence": "The book that I read is very interesting.", "error_type": "定语从句", "explanation": "错误使用了疑问代词who，应使用关系代词that。"}
+{"error_sentence": "The movie which we watched last night was boring.", "correct_sentence": "The movie that we watched last night was boring.", "error_type": "定语从句", "explanation": "关系代词which通常不用在限制性定语从句中。"}
+{"error_sentence": "The man whom gave us the present is my uncle.", "correct_sentence": "The man who gave us the present is my uncle.", "error_type": "定语从句", "explanation": "关系代词whom用于限定性定语从句的宾语位置，但常用who代替。"}
+{"error_sentence": "The song that plays on the radio is my favorite.", "correct_sentence": "The song that is played on the radio is my favorite.", "error_type": "定语从句", "explanation": "关系副词that引导的定语从句中缺少了be动词。"}
+{"error_sentence": "The girl which she is my classmate is very smart.", "correct_sentence": "The girl who is my classmate is very smart.", "error_type": "定语从句", "explanation": "错误滥用关系代词which，应使用who指代人。"}
+{"error_sentence": "The house that we visited it last summer is for sale.", "correct_sentence": "The house that we visited last summer is for sale.", "error_type": "定语从句", "explanation": "错误地添加了代词it，使句子结构冗余。"}
+{"error_sentence": "The book that I bought yesterday is written by J.K. Rowling.", "correct_sentence": "The book which I bought yesterday is written by J.K. Rowling.", "error_type": "定语从句", "explanation": "错误地将限制性定语从句中的关系代词that换成了which。"}
+{"error_sentence": "The car which its color is red is mine.", "correct_sentence": "The car whose color is red is mine.", "error_type": "定语从句", "explanation": "错误地使用了代词its，应使用whose表所属关系。"}
+{"error_sentence": "The student that he studies very hard got the scholarship.", "correct_sentence": "The student who studies very hard got the scholarship.", "error_type": "定语从句", "explanation": "错误地使用了代词he，应使用关系代词who指代学生。"}
+{"error_sentence": "The pen which I bought is broken.", "correct_sentence": "The pen that I bought is broken.", "error_type": "定语从句", "explanation": "错误地使用了which，应使用that作为限制性定语从句的关系代词。"}
+{"error_sentence": "She and I was late for the meeting.", "correct_sentence": "She and I were late for the meeting.", "error_type": "主谓一致", "explanation": "主语为复数，谓语动词应使用复数形式。"}
+{"error_sentence": "Each of the students are interested in the project.", "correct_sentence": "Each of the students is interested in the project.", "error_type": "主谓一致", "explanation": "Each作为主语时，谓语动词应与最近的名词一致。"}
+{"error_sentence": "The team is playing well this season.", "correct_sentence": "The team are playing well this season.", "error_type": "主谓一致", "explanation": "集体名词作主语时，若强调个体，谓语动词用复数。"}
+{"error_sentence": "The family were watching television when I arrived.", "correct_sentence": "The family was watching television when I arrived.", "error_type": "主谓一致", "explanation": "Family作为集合名词，若作整体看待，谓语动词用单数。"}
+{"error_sentence": "The news is exciting.", "correct_sentence": "The news are exciting.", "error_type": "主谓一致", "explanation": "News指的是不同报道时，应视为复数，谓语动词用复数。"}
+{"error_sentence": "The police was investigating the crime scene.", "correct_sentence": "The police were investigating the crime scene.", "error_type": "主谓一致", "explanation": "Police作为集合名词，强调多个个体时，用复数。"}
+{"error_sentence": "She or he is coming to the party.", "correct_sentence": "She or he are coming to the party.", "error_type": "主谓一致", "explanation": "以or连接的两个主语，在不确定具体哪一个时，谓语动词用复数。"}
+{"error_sentence": "There is many apples in the basket.", "correct_sentence": "There are many apples in the basket.", "error_type": "主谓一致", "explanation": "Many修饰可数名词复数，谓语动词应为复数形式。"}
+{"error_sentence": "Only I understood the problem then.", "correct_sentence": "Only then did I understand the problem.", "error_type": "倒装句", "explanation": "没有使用倒装结构，句子缺少强调效果"}
+{"error_sentence": "After finishing homework, he went to bed.", "correct_sentence": "Only after finishing homework did he go to bed.", "error_type": "倒装句", "explanation": "缺少倒装导致强调句式变形错误"}
+{"error_sentence": "Without water, we can't live.", "correct_sentence": "Without water, we cannot live.", "error_type": "倒装句", "explanation": "没有使用倒装结构，应该在否定副词后使用部分倒装"}
+{"error_sentence": "Never I have seen such a beautiful scene.", "correct_sentence": "Never have I seen such a beautiful scene.", "error_type": "倒装句", "explanation": "完全倒装位置错误，助动词应置于主语前"}
+{"error_sentence": "Not only he finished the project but also he helped others.", "correct_sentence": "Not only did he finish the project but also he helped others.", "error_type": "倒装句", "explanation": "并列句中第一个分句倒装，第二个分句未倒装"}
+{"error_sentence": "Seldom he comes to the party.", "correct_sentence": "Seldom does he come to the party.", "error_type": "倒装句", "explanation": "否定副词后应使用部分倒装，却未将助动词提前"}
+{"error_sentence": "Under no circumstances will we give up.", "correct_sentence": "Under no circumstances do we give up.", "error_type": "倒装句", "explanation": "此句应使用部分倒装，却使用了陈述句语序"}
+{"error_sentence": "Not until he arrived home did I realize the mistake.", "correct_sentence": "Not until he arrived home did I realize my mistake.", "error_type": "倒装句", "explanation": "代词使用错误，应指向自身，使用了第三人称单数"}
+{"error_sentence": "He likes music, but he don't like rock.", "correct_sentence": "Although he likes music, he doesn't like rock.", "error_type": "连接词", "explanation": "使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"error_sentence": "She is a student, and she works in the evening.", "correct_sentence": "She is a student, and she also works in the evening.", "error_type": "连接词", "explanation": "此处应使用also来加强语气，而不是简单地用and。"}
+{"error_sentence": "I wanted to go to the cinema, but my friends didn't want to.", "correct_sentence": "I wanted to go to the cinema, but my friends preferred to stay at home.", "error_type": "连接词", "explanation": "使用preferred to更精确表达朋友的选择，而不是简单的否定。"}
+{"error_sentence": "It's hot, so we stay inside.", "correct_sentence": "It's hot, so we stay inside rather than go out.", "error_type": "连接词", "explanation": "正确使用rather than来表达对比，增强句子逻辑性。"}
+{"error_sentence": "They started early, and they finished late.", "correct_sentence": "They started early, yet they finished late.", "error_type": "连接词", "explanation": "使用yet来表达开始和结束之间的时间跨度，增强意外性。"}
+{"error_sentence": "She finished her homework, and she went to bed.", "correct_sentence": "She finished her homework, so she went to bed.", "error_type": "连接词", "explanation": "使用so来表达因果关系，说明做完作业是睡觉的原因。"}
+{"error_sentence": "The weather was bad, but we decided to go hiking.", "correct_sentence": "Despite the bad weather, we decided to go hiking.", "error_type": "连接词", "explanation": "用despite来强调即使天气不好，我们还决定去徒步。"}
+{"error_sentence": "You can come, or you can stay at home.", "correct_sentence": "You can either come or stay at home.", "error_type": "连接词", "explanation": "使用either...or...来表达两个选项，强调选择性。"}
+{"error_sentence": "I will go to the park, unless it rains.", "correct_sentence": "I will go to the park if it doesn't rain.", "error_type": "连接词", "explanation": "应该使用if来引导条件状语从句，表示如果天气不下雨的假设。"}
+{"error_sentence": "He is a good student, because he studies hard.", "correct_sentence": "He is a good student since he studies hard.", "error_type": "连接词", "explanation": "使用since来引导原因状语从句，表示因果关系。"}
+{"error_sentence": "He waits at the bus stop for two hours.", "correct_sentence": "He waits for two hours at the bus stop.", "error_type": "介词", "explanation": "介词at错误地放在了时间之前，应放在时间之后。"}
+{"error_sentence": "I will arrive in New York on next Monday.", "correct_sentence": "I will arrive in New York next Monday.", "error_type": "介词", "explanation": "表示将来时间的on被错误使用，next Monday前不需要介词。"}
+{"error_sentence": "She has a lot of books in English language.", "correct_sentence": "She has a lot of books in English.", "error_type": "介词", "explanation": "在这种情况下，language不需要介词in，直接用English即可。"}
+{"error_sentence": "He is looking for a job at foreign companies.", "correct_sentence": "He is looking for a job in foreign companies.", "error_type": "介词", "explanation": "在描述在公司内部的工作时，应使用in而不是at。"}
+{"error_sentence": "Do you agree with me at this opinion?", "correct_sentence": "Do you agree with me on this opinion?", "error_type": "介词", "explanation": "在表达同意某个观点时，应使用on而不是at。"}
+{"error_sentence": "Please turn off the light in you leave.", "correct_sentence": "Please turn off the light when you leave.", "error_type": "介词", "explanation": "介词错误，应使用when表示时间关系而不是in。"}
+{"error_sentence": "She is good to music.", "correct_sentence": "She is good at music.", "error_type": "介词", "explanation": "描述在音乐上擅长应该使用at而不是to。"}
+{"error_sentence": "I am very familiar of this city.", "correct_sentence": "I am very familiar with this city.", "error_type": "介词", "explanation": "描述对某事物熟悉应该使用with而不是of。"}
+{"error_sentence": "She is studying of Chinese history.", "correct_sentence": "She is studying Chinese history.", "error_type": "介词", "explanation": "在提到研究某个学科时，不应使用of，而是直接使用学科名称。"}

@@ -1,0 +1,28 @@
+=== 测试 1: 虚拟语气 ===
+❌ 输入: If I know tomorrow exam, I will prepare.
+✅ 输出: If I know tomorrow's exam, I will prepare.
+🎯 期望: If I knew there was an exam tomorrow, I would prepare.
+
+=== 测试 2: 时态一致 ===
+❌ 输入: He said he goes to the store yesterday.
+✅ 输出: He said he goes to the store yesterday.
+🎯 期望: He said he went to the store yesterday.
+
+=== 测试 3: 定语从句 ===
+❌ 输入: The book which you recommended it is great.
+✅ 输出: The book which you recommended is great.
+🎯 期望: The book which you recommended is great.
+
+=== 测试 4: 非谓语动词 ===
+❌ 输入: He went home finish his work.
+✅ 输出: He went home to finish his work.
+🎯 期望: He went home to finish his work.
+
+=== 测试 5: 主谓一致 ===
+❌ 输入: Neither of the solutions are correct.
+✅ 输出: Neither of the solutions is correct.
+🎯 期望: Neither of the solutions is correct.
+
+============================================================
+📊 准确率: 4/5 (80.0%)
+============================================================

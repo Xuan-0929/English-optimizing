@@ -1,0 +1,17 @@
+.env
+*.pyc
+__pycache__/
+*.log
+
+# 排除大型模型文件
+models/
+offload_temp/
+sft_model/
+
+# 排除训练数据（如果数据量很大）
+# data/
+
+# 排除训练生成的文件
+sft_train_filtered.jsonl
+sft_train_direct.jsonl
+evaluate_results.json

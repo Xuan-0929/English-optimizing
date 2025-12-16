@@ -1,0 +1,72 @@
+[
+  {
+    "type": "虚拟语气",
+    "input": "If I know tomorrow exam, I will prepare.",
+    "output": "纠错步骤：\n1. 分析句型结构：if引导条件状语从句，主句为将来时。\n2. 检查时态一致性：预期未来时应与将来时一致。\n3. 更正错误：将will改为would。\n\n正确句子:\nIf I knew tomorrow exam, I would prepare.\n\n再思考：\n1. if引导的疑问句中，会用do或will作为助动词。\n2. 用于表达推测时，常用情态动词如can、could等。",
+    "expected": "If I knew there was an exam tomorrow, I would prepare.",
+    "score": "⚠️ 部分正确"
+  },
+  {
+    "type": "时态一致",
+    "input": "He said he goes to the store yesterday.",
+    "output": "错误类型：动词时态\n改正：He said he went to the store yesterday.\n解释：陈述句中的时态不一致，应与临近的谓语动词保持一致。",
+    "expected": "He said he went to the store yesterday.",
+    "score": "✅ 完全正确"
+  },
+  {
+    "type": "定语从句",
+    "input": "The book which you recommended it is great.",
+    "output": "纠错步骤：\n1. 代词检查：句子中使用了双重代词，即you和it都指向同一事物。\n2. 标点符号检查：句号位置正确，但缺少主语。\n3. 时态一致性：recommend是动词原形，应与is保持一致。\n\n改正步骤：\n1. 删除双重代词it。\n2. 改正时态为复数。\n3. 添加主语The book。\n\n正确答案：\nThe book that you recommended is great.\n\n再思考：\n4. 检查定语从句结构是否完整。\n5. 确认that引导的限制性定语从句是否准确。",
+    "expected": "The book which you recommended is great.",
+    "score": "⚠️ 部分正确"
+  },
+  {
+    "type": "非谓语动词",
+    "input": "He went home finish his work.",
+    "output": "错误类型：介词\n改正：He went home to finish his work.\n解释：使用to表示目的时，应添加介词to。",
+    "expected": "He went home to finish his work.",
+    "score": "✅ 完全正确"
+  },
+  {
+    "type": "主谓一致",
+    "input": "Neither of the solutions are correct.",
+    "output": "纠错步骤：\n1. 识别句型：否定句\n2. 检查主语：代词\n3. 确认数和性：单数\n4. 检查动词形式\n5. 得出结论\n\n改正步骤：\n1. 将are改为is\n6. 得出结论\n\n正确句子：Neither of the solutions is correct.\n总结：错误在于主谓一致，应将are改为is。",
+    "expected": "Neither of the solutions is correct.",
+    "score": "✅ 完全正确"
+  },
+  {
+    "type": "倒装句",
+    "input": "Only then I understood the problem.",
+    "output": "正确答案是：Only then did I understand the problem.\n\n解析：在复合句中，如果主句中的动词为强调结构，则其时间状语应放在主句之前。",
+    "expected": "Only then did I understand the problem.",
+    "score": "✅ 完全正确"
+  },
+  {
+    "type": "连接词",
+    "input": "Although it was raining, but we went out.",
+    "output": "纠错步骤：\n1. 分析句型结构：疑问句\n2. 检查词汇搭配：but用于表达转折，此处应使用so\n3. 修改成正确语序\n\n正确句子:\nAlthough it was raining, so we went out.\n\n总结：\n纠错过程需关注句型结构和词汇搭配，确保逻辑连贯。",
+    "expected": "Although it was raining, we went out.",
+    "score": "❌ 错误"
+  },
+  {
+    "type": "冠词",
+    "input": "I saw cat in the park.",
+    "output": "错误类型：名词单复数\n改正：I saw cats in the park.\n解释：cats是可数名词，此处应使用复数形式。",
+    "expected": "I saw a cat in the park.",
+    "score": "❌ 错误"
+  },
+  {
+    "type": "介词",
+    "input": "She is interested for learning English.",
+    "output": "错误类型：介词\n改正：She is interested in learning English.\n解释：使用in而不是for表示对某事物的兴趣。",
+    "expected": "She is interested in learning English.",
+    "score": "✅ 完全正确"
+  },
+  {
+    "type": "词性误用",
+    "input": "He is a very beauty.",
+    "output": "错误类型：名词单复数\n改正：He is a very beautiful.\n解释：beautiful是形容词，用作定语，应与单数名词匹配。",
+    "expected": "He is very beautiful.",
+    "score": "⚠️ 部分正确"
+  }
+]
