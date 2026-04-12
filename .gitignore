@@ -14,4 +14,3 @@ sft_model/
 # 排除训练生成的文件
 sft_train_filtered.jsonl
 sft_train_direct.jsonl
-evaluate_results.json
