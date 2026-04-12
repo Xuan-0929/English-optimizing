@@ -9,7 +9,7 @@ from transformers import (
     Trainer,
     DataCollatorForSeq2Seq
 )
-from peft import LoraConfig, get_peft_model, TaskType
+from peft import LoraConfig, get_peft_model, TaskType, PeftModel
 import json
 from datetime import datetime
 
@@ -48,9 +48,9 @@ def tokenize_function(examples, tokenizer, max_length=512):
 
 def main():
     # ========== 核心配置（修改这里） ==========
-    MODEL_PATH = "./models/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1"  # ✅ 使用相对路径
-    DATA_PATH = "./sft_train_filtered.jsonl"      # ✅ 你的数据文件
-    OUTPUT_DIR = "./sft_model"                   # ✅ 输出目录
+    MODEL_PATH = "./models/Qwen2.5-3B-Instruct"  # ✅ 使用简化的相对路径
+    DATA_PATH = "./data/sft_train.jsonl"      # ✅ 数据文件路径（根据目录结构调整）
+    OUTPUT_DIR = "./train/sft_model"                   # ✅ 输出目录（避免与根目录冲突）
     
     # 增量训练配置
     INCREMENTAL_TRAINING = False  # ✅ 设置为True表示在现有LoRA基础上继续训练
