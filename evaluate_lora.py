@@ -16,6 +16,49 @@ DEFAULT_TEST_CASES = [
     "We will meeting tomorrow.",
 ]
 
+def _ensure_torch_set_submodule() -> None:
+    """Backport ``nn.Module.set_submodule`` for PyTorch < 2.6.
+
+    Transformers' bitsandbytes integration uses ``set_submodule`` when applying
+    4-bit quantization. PyTorch added this API in 2.6; on older versions it
+    raises AttributeError during model load.
+    """
+    import torch
+    import torch.nn as nn
+
+    if hasattr(nn.Module, "set_submodule"):
+        return
+
+    def set_submodule(
+        self: nn.Module,
+        target: str,
+        module: nn.Module,
+        strict: bool = False,
+    ) -> None:
+        if target == "":
+            raise ValueError("Cannot set the submodule without a target name!")
+        if not isinstance(module, nn.Module):
+            raise ValueError(f"`module` is not an nn.Module, found {type(module)}")
+
+        atoms = target.split(".")
+        parent: nn.Module
+        if len(atoms) == 1:
+            parent = self
+        else:
+            parent = self.get_submodule(".".join(atoms[:-1]))
+
+        if strict and not hasattr(parent, atoms[-1]):
+            raise AttributeError(f"{parent._get_name()} has no attribute `{atoms[-1]}`")
+
+        if hasattr(parent, atoms[-1]):
+            mod = getattr(parent, atoms[-1])
+            if not isinstance(mod, torch.nn.Module):
+                raise AttributeError(f"`{atoms[-1]}` is not an nn.Module")
+
+        setattr(parent, atoms[-1], module)
+
+    nn.Module.set_submodule = set_submodule  # type: ignore[method-assign]
+
 
 def resolve_model_path(model_path: str = None) -> str:
     if model_path:
@@ -32,6 +75,9 @@ def resolve_model_path(model_path: str = None) -> str:
 
 def load_model(base_model_path: str, lora_path: str = None):
     import torch
+
+    _ensure_torch_set_submodule()
+
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
@@ -48,7 +94,7 @@ def load_model(base_model_path: str, lora_path: str = None):
         trust_remote_code=True,
         local_files_only=True,
         quantization_config=bnb_config,
-        torch_dtype=torch.float16,
+        dtype=torch.float16,
     )
     if lora_path:
         model = PeftModel.from_pretrained(model, lora_path)
@@ -69,15 +115,21 @@ def generate_reply(model, tokenizer, sentence: str, max_new_tokens: int = 160) -
 
     prompt = f"纠正以下句子的语法错误\n{sentence}"
     messages = [{"role": "user", "content": prompt}]
-    input_ids = tokenizer.apply_chat_template(
+    enc = tokenizer.apply_chat_template(
         messages,
+        tokenize=True,
         return_tensors="pt",
         add_generation_prompt=True,
-    ).to(model.device)
+    )
+    input_ids = enc["input_ids"].to(model.device)
+    attention_mask = enc.get("attention_mask")
+    if attention_mask is not None:
+        attention_mask = attention_mask.to(model.device)
 
     with torch.no_grad():
         output = model.generate(
             input_ids=input_ids,
+            attention_mask=attention_mask,
             max_new_tokens=max_new_tokens,
             do_sample=False,
             temperature=1.0,

@@ -90,6 +90,47 @@ def build_tokenize_fn(tokenizer, max_length: int):
     return tokenize_fn
 
 
+def _ensure_torch_set_submodule() -> None:
+    """Backport ``nn.Module.set_submodule`` for PyTorch < 2.6.
+
+    Transformers' bitsandbytes integration calls ``set_submodule`` when applying
+    4-bit quantization; that API was added in PyTorch 2.6. Without this patch,
+    loading a 4-bit model fails with AttributeError on older torch.
+    """
+    import torch
+    import torch.nn as nn
+
+    if hasattr(nn.Module, "set_submodule"):
+        return
+
+    def set_submodule(
+        self: nn.Module,
+        target: str,
+        module: nn.Module,
+        strict: bool = False,
+    ) -> None:
+        if target == "":
+            raise ValueError("Cannot set the submodule without a target name!")
+        if not isinstance(module, nn.Module):
+            raise ValueError(f"`module` is not an nn.Module, found {type(module)}")
+        atoms = target.split(".")
+        if len(atoms) == 1:
+            parent: nn.Module = self
+        else:
+            parent = self.get_submodule(".".join(atoms[:-1]))
+        if strict and not hasattr(parent, atoms[-1]):
+            raise AttributeError(
+                f"{parent._get_name()} has no attribute `{atoms[-1]}`"
+            )
+        if hasattr(parent, atoms[-1]):
+            mod = getattr(parent, atoms[-1])
+            if not isinstance(mod, torch.nn.Module):
+                raise AttributeError(f"`{atoms[-1]}` is not an nn.Module")
+        setattr(parent, atoms[-1], module)
+
+    nn.Module.set_submodule = set_submodule  # type: ignore[method-assign]
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Train Qwen SFT v1 with LoRA.")
     parser.add_argument("--model-path", default=None, help="Local base model path.")
@@ -138,6 +179,9 @@ def main() -> None:
 
     from datasets import Dataset
     import torch
+
+    _ensure_torch_set_submodule()
+
     from peft import LoraConfig, PeftModel, TaskType, get_peft_model
     from transformers import (
         AutoModelForCausalLM,
@@ -171,7 +215,7 @@ def main() -> None:
         trust_remote_code=True,
         local_files_only=True,
         quantization_config=bnb_config,
-        torch_dtype=torch.float16,
+        dtype=torch.float16,
     )
     tokenizer = AutoTokenizer.from_pretrained(
         model_path,
@@ -233,7 +277,7 @@ def main() -> None:
         save_steps=args.save_steps,
         eval_steps=args.eval_steps,
         save_total_limit=args.save_total_limit,
-        evaluation_strategy="steps",
+        eval_strategy="steps",
         save_strategy="steps",
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
