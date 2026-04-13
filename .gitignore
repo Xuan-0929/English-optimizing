@@ -3,10 +3,24 @@
 __pycache__/
 *.log
 
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# Virtualenv
+.venv/
+venv/
+
 # 排除大型模型文件
 models/
 offload_temp/
 sft_model/
+outputs/
+
+# Hugging Face cache / accelerate
+**/.cache/huggingface/
+**/.cache/torch/
+**/.cache/transformers/
+**/.cache/bitsandbytes/
 
 # 排除训练数据（如果数据量很大）
 # data/
@@ -15,3 +29,22 @@ sft_model/
 sft_train_filtered.jsonl
 sft_train_direct.jsonl
 evaluate_results.json
+
+# Large model / weights / checkpoints (common extensions)
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.gguf
+*.onnx
+*.tflite
+*.h5
+*.hdf5
+
+# Trainer / experiment outputs
+runs/
+wandb/
+mlruns/
+lightning_logs/
+tensorboard/
