@@ -8,7 +8,8 @@
 ```bash
 python3 train/prepare_sft_data.py \
   --input data/sft_train.jsonl \
-  --output-dir data/processed
+  --output-dir data/processed \
+  --min-explanation-chars 8
 ```
 
 2. 运行 SFT 训练（Qwen + LoRA 4bit）
@@ -19,9 +20,10 @@ python3 train/train_sft.py \
   --output-dir outputs/sft_v1
 ```
 
-3. 对比 base 与 LoRA 输出
+3. 对比 base 与 LoRA 输出（并在有 gold 的 jsonl 上自动打分）
 ```bash
 python3 evaluate_lora.py \
+  --test-file data/processed/sft_train_v1_val.jsonl \
   --lora-path outputs/sft_v1/final \
   --output outputs/sft_v1/eval_compare.json
 ```
@@ -32,6 +34,11 @@ python3 evaluate_lora.py \
   - `./models/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1`
 - 如你的模型在其他目录，手动传 `--model-path <path>` 即可。
 - 训练产物默认在 `outputs/sft_v1/`。
+- `evaluate_lora.py` 若输入是带 `output` 字段的 `jsonl`，会输出：
+  - `base_correction_exact_rate`
+  - `lora_correction_exact_rate`
+  - `lora_type_exact_rate`
+  - 以及 `by_type` 分语法点统计
 
 ## 项目结构
 

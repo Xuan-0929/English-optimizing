@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Compare base model vs LoRA model on grammar-correction prompts."""
+"""Compare base vs LoRA outputs and compute metrics when gold labels exist."""
 
 import argparse
 import json
+import re
+from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional, Tuple
+
 
 DEFAULT_TEST_CASES = [
     "He said he goes to the store yesterday.",
@@ -16,51 +19,35 @@ DEFAULT_TEST_CASES = [
     "We will meeting tomorrow.",
 ]
 
-def _ensure_torch_set_submodule() -> None:
-    """Backport ``nn.Module.set_submodule`` for PyTorch < 2.6.
+ERROR_TYPE_RE = re.compile(r"\*\*错误类型\*\*:\s*(.+?)\n")
+CORRECTION_RE = re.compile(r"\*\*改正\*\*:\s*(.+?)\n")
+EXPLANATION_RE = re.compile(r"\*\*解释\*\*:\s*(.+)$", re.DOTALL)
+QUOTE_SENT_RE = re.compile(r'"([^"]+)"')
+WS_RE = re.compile(r"\s+")
 
-    Transformers' bitsandbytes integration uses ``set_submodule`` when applying
-    4-bit quantization. PyTorch added this API in 2.6; on older versions it
-    raises AttributeError during model load.
-    """
-    import torch
+
+def _ensure_torch_set_submodule() -> None:
     import torch.nn as nn
 
     if hasattr(nn.Module, "set_submodule"):
         return
 
-    def set_submodule(
-        self: nn.Module,
-        target: str,
-        module: nn.Module,
-        strict: bool = False,
-    ) -> None:
+    def set_submodule(self, target, module, strict=False):
         if target == "":
-            raise ValueError("Cannot set the submodule without a target name!")
-        if not isinstance(module, nn.Module):
-            raise ValueError(f"`module` is not an nn.Module, found {type(module)}")
-
+            raise ValueError("target cannot be empty")
         atoms = target.split(".")
-        parent: nn.Module
         if len(atoms) == 1:
             parent = self
         else:
             parent = self.get_submodule(".".join(atoms[:-1]))
-
         if strict and not hasattr(parent, atoms[-1]):
-            raise AttributeError(f"{parent._get_name()} has no attribute `{atoms[-1]}`")
-
-        if hasattr(parent, atoms[-1]):
-            mod = getattr(parent, atoms[-1])
-            if not isinstance(mod, torch.nn.Module):
-                raise AttributeError(f"`{atoms[-1]}` is not an nn.Module")
-
+            raise AttributeError(f"missing submodule {atoms[-1]}")
         setattr(parent, atoms[-1], module)
 
     nn.Module.set_submodule = set_submodule  # type: ignore[method-assign]
 
 
-def resolve_model_path(model_path: str = None) -> str:
+def resolve_model_path(model_path: Optional[str]) -> str:
     if model_path:
         return model_path
     candidates = [
@@ -73,21 +60,18 @@ def resolve_model_path(model_path: str = None) -> str:
     raise FileNotFoundError("No local base model found. Please pass --base-model-path.")
 
 
-def load_model(base_model_path: str, lora_path: str = None):
+def load_model(base_model_path: str, lora_path: Optional[str] = None):
     import torch
-
-    _ensure_torch_set_submodule()
-
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
+    _ensure_torch_set_submodule()
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_compute_dtype=torch.float16,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_use_double_quant=True,
     )
-
     model = AutoModelForCausalLM.from_pretrained(
         base_model_path,
         device_map="auto",
@@ -110,19 +94,19 @@ def load_model(base_model_path: str, lora_path: str = None):
     return model, tokenizer
 
 
-def generate_reply(model, tokenizer, sentence: str, max_new_tokens: int = 160) -> str:
+def generate_reply(model, tokenizer, sentence: str, max_new_tokens: int) -> str:
     import torch
 
     prompt = f"纠正以下句子的语法错误\n{sentence}"
     messages = [{"role": "user", "content": prompt}]
-    enc = tokenizer.apply_chat_template(
+    encoded = tokenizer.apply_chat_template(
         messages,
         tokenize=True,
         return_tensors="pt",
         add_generation_prompt=True,
     )
-    input_ids = enc["input_ids"].to(model.device)
-    attention_mask = enc.get("attention_mask")
+    input_ids = encoded["input_ids"].to(model.device)
+    attention_mask = encoded.get("attention_mask")
     if attention_mask is not None:
         attention_mask = attention_mask.to(model.device)
 
@@ -132,87 +116,210 @@ def generate_reply(model, tokenizer, sentence: str, max_new_tokens: int = 160) -
             attention_mask=attention_mask,
             max_new_tokens=max_new_tokens,
             do_sample=False,
-            temperature=1.0,
             repetition_penalty=1.05,
         )
-    generated = output[0][input_ids.shape[-1] :]
-    return tokenizer.decode(generated, skip_special_tokens=True).strip()
+    gen = output[0][input_ids.shape[-1] :]
+    return tokenizer.decode(gen, skip_special_tokens=True).strip()
 
 
-def load_test_cases(test_file: str = None) -> List[str]:
+def parse_sft_output(output: str) -> Optional[Tuple[str, str, str]]:
+    m1 = ERROR_TYPE_RE.search(output)
+    m2 = CORRECTION_RE.search(output)
+    m3 = EXPLANATION_RE.search(output)
+    if not (m1 and m2 and m3):
+        return None
+    return m1.group(1).strip(), m2.group(1).strip(), m3.group(1).strip()
+
+
+def normalize_text(s: str) -> str:
+    s = s.strip().lower()
+    s = s.replace("“", '"').replace("”", '"').replace("’", "'")
+    s = WS_RE.sub(" ", s)
+    return s.strip(" .;:")
+
+
+def extract_correction(raw_output: str) -> str:
+    parsed = parse_sft_output(raw_output)
+    if parsed:
+        return parsed[1]
+
+    quoted = QUOTE_SENT_RE.findall(raw_output)
+    if quoted:
+        return quoted[0].strip()
+
+    line = raw_output.splitlines()[0] if raw_output.splitlines() else raw_output
+    line = line.strip().lstrip("-*0123456789. ")
+    prefixes = [
+        "the correct sentence is",
+        "the sentence should be corrected to",
+        "correct sentence:",
+        "改正:",
+        "正确句子是",
+    ]
+    low = line.lower()
+    for p in prefixes:
+        if low.startswith(p):
+            return line[len(p) :].strip(' :"')
+    return line
+
+
+def extract_error_type(raw_output: str) -> str:
+    parsed = parse_sft_output(raw_output)
+    if parsed:
+        return parsed[0]
+    return ""
+
+
+def load_eval_items(test_file: Optional[str]) -> List[Dict]:
     if not test_file:
-        return DEFAULT_TEST_CASES
+        return [{"input": x, "gold_correction": None, "gold_type": None} for x in DEFAULT_TEST_CASES]
+
     path = Path(test_file)
     if path.suffix == ".jsonl":
-        rows = []
+        items = []
         with path.open("r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if not line:
                     continue
-                item = json.loads(line)
-                if "input" in item:
-                    rows.append(str(item["input"]).strip())
-        return rows
+                row = json.loads(line)
+                user_input = str(row.get("input", "")).strip()
+                if not user_input:
+                    continue
+                gold_correction = None
+                gold_type = None
+                output = row.get("output")
+                if isinstance(output, str):
+                    parsed = parse_sft_output(output)
+                    if parsed:
+                        gold_type, gold_correction, _ = parsed
+                items.append(
+                    {
+                        "input": user_input,
+                        "gold_correction": gold_correction,
+                        "gold_type": gold_type,
+                    }
+                )
+        return items
+
     with path.open("r", encoding="utf-8") as f:
-        return [x.strip() for x in f.readlines() if x.strip()]
+        lines = [x.strip() for x in f.readlines() if x.strip()]
+    return [{"input": x, "gold_correction": None, "gold_type": None} for x in lines]
 
 
-def build_parser():
-    parser = argparse.ArgumentParser(description="Compare base vs LoRA model outputs.")
-    parser.add_argument("--base-model-path", default=None, help="Local base model path.")
-    parser.add_argument(
-        "--lora-path",
-        default="outputs/sft_v1/final",
-        help="LoRA adapter path.",
-    )
-    parser.add_argument(
-        "--test-file",
-        default=None,
-        help="Optional test file (.txt or .jsonl with input field).",
-    )
-    parser.add_argument(
-        "--output",
-        default="outputs/sft_v1/eval_compare.json",
-        help="Output JSON path.",
-    )
-    parser.add_argument("--max-new-tokens", type=int, default=160)
-    return parser
+def summarize_scores(items: List[Dict]) -> Dict:
+    scored = [x for x in items if x.get("gold_correction")]
+    if not scored:
+        return {
+            "scored_items": 0,
+            "message": "No gold labels found in test set. Only raw comparison generated.",
+        }
+
+    total = len(scored)
+    base_corr = sum(1 for x in scored if x["base_correction_exact"])
+    lora_corr = sum(1 for x in scored if x["lora_correction_exact"])
+    lora_type_total = sum(1 for x in scored if x.get("gold_type"))
+    lora_type_ok = sum(1 for x in scored if x.get("gold_type") and x["lora_type_exact"])
+
+    by_type = defaultdict(lambda: {"count": 0, "base_correction_exact": 0, "lora_correction_exact": 0, "lora_type_exact": 0})
+    for x in scored:
+        t = x.get("gold_type") or "UNKNOWN"
+        by_type[t]["count"] += 1
+        by_type[t]["base_correction_exact"] += int(bool(x["base_correction_exact"]))
+        by_type[t]["lora_correction_exact"] += int(bool(x["lora_correction_exact"]))
+        by_type[t]["lora_type_exact"] += int(bool(x["lora_type_exact"]))
+
+    by_type_rate = {}
+    for t, m in by_type.items():
+        n = max(1, m["count"])
+        by_type_rate[t] = {
+            "count": m["count"],
+            "base_correction_exact_rate": round(m["base_correction_exact"] / n, 4),
+            "lora_correction_exact_rate": round(m["lora_correction_exact"] / n, 4),
+            "lora_type_exact_rate": round(m["lora_type_exact"] / n, 4),
+        }
+
+    return {
+        "scored_items": total,
+        "base_correction_exact_rate": round(base_corr / total, 4),
+        "lora_correction_exact_rate": round(lora_corr / total, 4),
+        "lora_type_exact_rate": round(lora_type_ok / max(1, lora_type_total), 4),
+        "by_type": by_type_rate,
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(description="Compare base vs LoRA model outputs.")
+    p.add_argument("--base-model-path", default=None, help="Local base model path.")
+    p.add_argument("--lora-path", default="outputs/sft_v1/final", help="LoRA adapter path.")
+    p.add_argument("--test-file", default=None, help="Optional .txt or .jsonl file.")
+    p.add_argument("--output", default="outputs/sft_v1/eval_compare.json", help="Output JSON path.")
+    p.add_argument("--max-new-tokens", type=int, default=220)
+    return p
 
 
 def main() -> None:
     args = build_parser().parse_args()
     base_model_path = resolve_model_path(args.base_model_path)
-    test_cases = load_test_cases(args.test_file)
+    eval_items = load_eval_items(args.test_file)
 
     print("===== Evaluate Base vs LoRA =====")
     print(f"base_model_path: {base_model_path}")
     print(f"lora_path: {args.lora_path}")
-    print(f"test_cases: {len(test_cases)}")
+    print(f"test_items: {len(eval_items)}")
 
     base_model, base_tok = load_model(base_model_path, lora_path=None)
     lora_model, lora_tok = load_model(base_model_path, lora_path=args.lora_path)
 
     results: List[Dict] = []
-    for idx, sentence in enumerate(test_cases, start=1):
-        base_out = generate_reply(base_model, base_tok, sentence, args.max_new_tokens)
-        lora_out = generate_reply(lora_model, lora_tok, sentence, args.max_new_tokens)
-        result = {
+    for idx, item in enumerate(eval_items, start=1):
+        sentence = item["input"]
+        gold_correction = item.get("gold_correction")
+        gold_type = item.get("gold_type")
+
+        base_raw = generate_reply(base_model, base_tok, sentence, args.max_new_tokens)
+        lora_raw = generate_reply(lora_model, lora_tok, sentence, args.max_new_tokens)
+        base_corr = extract_correction(base_raw)
+        lora_corr = extract_correction(lora_raw)
+        lora_type = extract_error_type(lora_raw)
+
+        row = {
             "id": idx,
             "input": sentence,
-            "base_output": base_out,
-            "lora_output": lora_out,
+            "gold_correction": gold_correction,
+            "gold_type": gold_type,
+            "base_output": base_raw,
+            "lora_output": lora_raw,
+            "base_correction": base_corr,
+            "lora_correction": lora_corr,
+            "lora_type": lora_type,
+            "base_correction_exact": None,
+            "lora_correction_exact": None,
+            "lora_type_exact": None,
         }
-        results.append(result)
-        print(f"[{idx}] input: {sentence}")
-        print(f"  base: {base_out}")
-        print(f"  lora: {lora_out}")
 
+        if gold_correction:
+            gold_norm = normalize_text(gold_correction)
+            row["base_correction_exact"] = normalize_text(base_corr) == gold_norm
+            row["lora_correction_exact"] = normalize_text(lora_corr) == gold_norm
+        if gold_type:
+            row["lora_type_exact"] = normalize_text(lora_type) == normalize_text(gold_type)
+
+        results.append(row)
+
+    summary = summarize_scores(results)
+
+    out = {
+        "summary": summary,
+        "items": results,
+    }
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", encoding="utf-8") as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
+        json.dump(out, f, ensure_ascii=False, indent=2)
 
+    print("summary:")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
     print(f"saved: {output_path}")
 
 

@@ -13,6 +13,22 @@ from typing import Dict, List, Optional, Tuple
 ERROR_TYPE_RE = re.compile(r"\*\*错误类型\*\*:\s*(.+?)\n")
 CORRECTION_RE = re.compile(r"\*\*改正\*\*:\s*(.+?)\n")
 EXPLANATION_RE = re.compile(r"\*\*解释\*\*:\s*(.+)$", re.DOTALL)
+BE_VERB_AGREEMENT_RE = re.compile(
+    r"\b(they|we|you)\s+is\b|\b(he|she|it)\s+are\b",
+    re.IGNORECASE,
+)
+DO_VERB_AGREEMENT_RE = re.compile(
+    r"\b(he|she|it)\s+don't\b|\b(i|you|we|they)\s+doesn't\b",
+    re.IGNORECASE,
+)
+THIRD_PERSON_RE = re.compile(
+    r"\b(he|she|it|my sister|my brother|the student|the teacher)\s+\w+\s+every day\b",
+    re.IGNORECASE,
+)
+RELATIVE_CLAUSE_RE = re.compile(
+    r"\b(which|that|who)\b.*\bit\b|\bthe person which\b|\bthe book who\b",
+    re.IGNORECASE,
+)
 
 
 def parse_output(output: str) -> Optional[Tuple[str, str, str]]:
@@ -28,7 +44,49 @@ def parse_output(output: str) -> Optional[Tuple[str, str, str]]:
     )
 
 
-def clean_records(records: List[Dict]) -> Tuple[List[Dict], Dict[str, int], Counter]:
+def format_output(error_type: str, correction: str, explanation: str) -> str:
+    return (
+        f"**错误类型**: {error_type}\n"
+        f"**改正**: {correction}\n"
+        f"**解释**: {explanation}"
+    )
+
+
+def normalize_error_type(user_input: str, correction: str, error_type: str) -> str:
+    src = user_input.strip()
+    tgt = correction.strip()
+    if not src or not tgt:
+        return error_type
+
+    src_l = src.lower()
+    tgt_l = tgt.lower()
+    if src_l == tgt_l:
+        return error_type
+
+    if BE_VERB_AGREEMENT_RE.search(src) or DO_VERB_AGREEMENT_RE.search(src):
+        return "主谓一致"
+
+    if THIRD_PERSON_RE.search(src) and re.search(r"\b(he|she|it)\s+\w+s\b", tgt_l):
+        return "主谓一致"
+
+    if RELATIVE_CLAUSE_RE.search(src):
+        return "定语从句"
+
+    if (
+        ("yesterday" in src_l or "last week" in src_l or "tomorrow" in src_l)
+        and src_l != tgt_l
+        and ("have been" in src_l or "had been" in src_l or "will" in src_l)
+    ):
+        return "时态一致"
+
+    return error_type
+
+
+def clean_records(
+    records: List[Dict],
+    min_explanation_chars: int = 8,
+    relabel_rules: bool = True,
+) -> Tuple[List[Dict], Dict[str, int], Counter]:
     cleaned: List[Dict] = []
     seen_inputs = set()
     stats = {
@@ -37,6 +95,8 @@ def clean_records(records: List[Dict]) -> Tuple[List[Dict], Dict[str, int], Coun
         "empty_text": 0,
         "same_input_and_correction": 0,
         "duplicate_input": 0,
+        "short_explanation": 0,
+        "relabel_by_rule": 0,
     }
     error_types = Counter()
 
@@ -56,10 +116,13 @@ def clean_records(records: List[Dict]) -> Tuple[List[Dict], Dict[str, int], Coun
         if parsed is None:
             stats["invalid_output_format"] += 1
             continue
-        error_type, correction, _ = parsed
+        error_type, correction, explanation = parsed
 
         if user_input.lower() == correction.lower():
             stats["same_input_and_correction"] += 1
+            continue
+        if len(explanation) < min_explanation_chars:
+            stats["short_explanation"] += 1
             continue
 
         dedup_key = user_input.lower()
@@ -68,6 +131,15 @@ def clean_records(records: List[Dict]) -> Tuple[List[Dict], Dict[str, int], Coun
             continue
         seen_inputs.add(dedup_key)
 
+        final_error_type = error_type
+        if relabel_rules:
+            fixed_error_type = normalize_error_type(user_input, correction, error_type)
+            if fixed_error_type != error_type:
+                stats["relabel_by_rule"] += 1
+                final_error_type = fixed_error_type
+
+        output = format_output(final_error_type, correction, explanation)
+
         cleaned.append(
             {
                 "instruction": instruction,
@@ -75,7 +147,7 @@ def clean_records(records: List[Dict]) -> Tuple[List[Dict], Dict[str, int], Coun
                 "output": output,
             }
         )
-        error_types[error_type] += 1
+        error_types[final_error_type] += 1
 
     return cleaned, stats, error_types
 
@@ -116,6 +188,17 @@ def main() -> None:
         help="Validation ratio in (0, 1).",
     )
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
+    parser.add_argument(
+        "--min-explanation-chars",
+        type=int,
+        default=8,
+        help="Drop records with too-short explanation.",
+    )
+    parser.add_argument(
+        "--disable-relabel-rules",
+        action="store_true",
+        help="Disable rule-based error_type normalization.",
+    )
     args = parser.parse_args()
 
     if not 0.0 < args.val_ratio < 1.0:
@@ -126,7 +209,11 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     all_records = read_jsonl(input_path)
-    cleaned, stats, error_types = clean_records(all_records)
+    cleaned, stats, error_types = clean_records(
+        all_records,
+        min_explanation_chars=args.min_explanation_chars,
+        relabel_rules=not args.disable_relabel_rules,
+    )
 
     rng = random.Random(args.seed)
     rng.shuffle(cleaned)
