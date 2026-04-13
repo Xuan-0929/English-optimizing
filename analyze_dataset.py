@@ -139,18 +139,25 @@ def analyze_dataset(file_path):
     }
 
 if __name__ == "__main__":
-    # 分析过滤前后的数据集
-    original_file = 'sft_train_direct.jsonl'
-    filtered_file = 'sft_train_filtered.jsonl'
-    
+    # 默认分析当前实际训练集；其余文件若存在也一并分析
+    train_file = "data/sft_train.jsonl"
+    original_file = "sft_train_direct.jsonl"
+    filtered_file = "data/sft_train_filtered.jsonl"
+
+    if os.path.exists(train_file):
+        print("\n" + "=" * 50)
+        print("训练集 data/sft_train.jsonl:")
+        print("=" * 50)
+        analyze_dataset(train_file)
+
     if os.path.exists(original_file):
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("原始数据集分析结果:")
-        print("="*50)
+        print("=" * 50)
         analyze_dataset(original_file)
-    
+
     if os.path.exists(filtered_file):
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("过滤后数据集分析结果:")
-        print("="*50)
+        print("=" * 50)
         analyze_dataset(filtered_file)
