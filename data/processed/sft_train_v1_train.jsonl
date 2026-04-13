@@ -46,7 +46,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "There is many dogs in the park.", "output": "**错误类型**: 主谓一致\n**改正**: There are many dogs in the park.\n**解释**: Many修饰可数名词复数，谓语动词应为复数形式。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Do they agree with you at these theories?", "output": "**错误类型**: 介词\n**改正**: Do they agree with you on these theories?\n**解释**: 在表达同意这些理论时，应使用on而不是at。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The tree who grows in our backyard is old.", "output": "**错误类型**: 定语从句\n**改正**: The tree that grows in our backyard is old.\n**解释**: 错误使用了疑问代词who，应使用关系代词that。"}
-{"instruction": "纠正以下句子的语法错误", "input": "John loves sports, but he don't favor football.", "output": "**错误类型**: 连接词\n**改正**: Although John loves sports, he doesn't favor football.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "John loves sports, but he don't favor football.", "output": "**错误类型**: 主谓一致\n**改正**: Although John loves sports, he doesn't favor football.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The party which we attended last week was very lively.", "output": "**错误类型**: 定语从句\n**改正**: The party that we attended last week was very lively.\n**解释**: 关系代词which通常不用在限制性定语从句中。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The novel which I finished last month was boring.", "output": "**错误类型**: 定语从句\n**改正**: The novel that I finished last month was boring.\n**解释**: 错误地使用了which，应使用that作为限制性定语从句的关系代词。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Without light, we can't see.", "output": "**错误类型**: 倒装句\n**改正**: Without light, we cannot see.\n**解释**: 没有使用倒装结构，应该在否定副词后使用部分倒装"}
@@ -91,8 +91,8 @@
 {"instruction": "纠正以下句子的语法错误", "input": "If she practiced the piano, she impress her teacher.", "output": "**错误类型**: 时态一致\n**改正**: If she practiced the piano, she would impress her teacher.\n**解释**: 条件句中主句应使用虚拟语气，即过去时。"}
 {"instruction": "纠正以下句子的语法错误", "input": "I was informed they will open a new branch in June.", "output": "**错误类型**: 时态一致\n**改正**: I was informed they would open a new branch in June.\n**解释**: 间接引语中应使用过去将来时态。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The band is performing at the festival.", "output": "**错误类型**: 主谓一致\n**改正**: The band are performing at the festival.\n**解释**: 集体名词作主语时，若强调个体，谓语动词用复数。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He is a teacher, but he don't enjoy marking papers.", "output": "**错误类型**: 连接词\n**改正**: Although he is a teacher, he doesn't enjoy marking papers.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Jerry enjoys movies, but he don't like action films.", "output": "**错误类型**: 连接词\n**改正**: Although Jerry enjoys movies, he doesn't like action films.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He is a teacher, but he don't enjoy marking papers.", "output": "**错误类型**: 主谓一致\n**改正**: Although he is a teacher, he doesn't enjoy marking papers.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Jerry enjoys movies, but he don't like action films.", "output": "**错误类型**: 主谓一致\n**改正**: Although Jerry enjoys movies, he doesn't like action films.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The project was complex, so we divided it into parts.", "output": "**错误类型**: 连接词\n**改正**: The project was complex, so we divided it into parts rather than tackled it all at once.\n**解释**: 正确使用rather than来表达对比，增强句子逻辑性。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The pilot that he flew the plane safely was promoted.", "output": "**错误类型**: 定语从句\n**改正**: The pilot who flew the plane safely was promoted.\n**解释**: 错误地使用了代词he，应使用关系代词who指代飞行员。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The store that I shopped it last week has good deals.", "output": "**错误类型**: 定语从句\n**改正**: The store that I shopped last week has good deals.\n**解释**: 错误地添加了代词it，使句子结构冗余。"}
@@ -183,7 +183,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The city who I visited last summer was beautiful.", "output": "**错误类型**: 定语从句\n**改正**: The city that I visited last summer was beautiful.\n**解释**: 错误使用了疑问代词who，应使用关系代词that。"}
 {"instruction": "纠正以下句子的语法错误", "input": "There is many textbooks in the library.", "output": "**错误类型**: 主谓一致\n**改正**: There are many textbooks in the library.\n**解释**: Many修饰可数名词复数，谓语动词应为复数形式。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The cake tasted great, because it was freshly baked.", "output": "**错误类型**: 连接词\n**改正**: The cake tasted great since it was freshly baked.\n**解释**: 使用since来引导原因状语从句，表示因果关系。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He likes to swim, but he don't enjoy diving.", "output": "**错误类型**: 连接词\n**改正**: Although he likes to swim, he doesn't enjoy diving.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He likes to swim, but he don't enjoy diving.", "output": "**错误类型**: 主谓一致\n**改正**: Although he likes to swim, he doesn't enjoy diving.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The couple were enjoying a romantic dinner at the restaurant.", "output": "**错误类型**: 主谓一致\n**改正**: The couple was enjoying a romantic dinner at the restaurant.\n**解释**: Family作为集合名词，若作整体看待，谓语动词用单数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The dog which its fur is golden loves to play fetch.", "output": "**错误类型**: 定语从句\n**改正**: The dog whose fur is golden loves to play fetch.\n**解释**: 错误地使用了代词its，应使用whose表所属关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The gift which my sister gave me was very thoughtful.", "output": "**错误类型**: 定语从句\n**改正**: The gift that my sister gave me was very thoughtful.\n**解释**: 关系代词which通常不用在限制性定语从句中。"}
@@ -228,7 +228,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The reviews is constructive.", "output": "**错误类型**: 主谓一致\n**改正**: The reviews are constructive.\n**解释**: Reviews指的是不同评论时，应视为复数，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "There is many chairs in the classroom.", "output": "**错误类型**: 主谓一致\n**改正**: There are many chairs in the classroom.\n**解释**: Many修饰可数名词复数，谓语动词应为复数形式。"}
 {"instruction": "纠正以下句子的语法错误", "input": "They are well-versed of the safety protocols.", "output": "**错误类型**: 介词\n**改正**: They are well-versed with the safety protocols.\n**解释**: 描述对某事物熟悉应该使用with而不是of。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He is a chef, but he don't like eating spicy food.", "output": "**错误类型**: 连接词\n**改正**: Although he is a chef, he doesn't like eating spicy food.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He is a chef, but he don't like eating spicy food.", "output": "**错误类型**: 主谓一致\n**改正**: Although he is a chef, he doesn't like eating spicy food.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The heat was unbearable, but we went to the festival.", "output": "**错误类型**: 连接词\n**改正**: Despite the unbearable heat, we went to the festival.\n**解释**: 用despite来强调即使酷热难耐，我们还去了节日庆典。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Only she can understand this concept.", "output": "**错误类型**: 倒装句\n**改正**: Only can she understand this concept.\n**解释**: 完全倒装位置错误，助动词应置于主语前"}
 {"instruction": "纠正以下句子的语法错误", "input": "The group is designing a new logo.", "output": "**错误类型**: 主谓一致\n**改正**: The group are designing a new logo.\n**解释**: 集体名词作主语时，若强调个体，谓语动词用复数。"}
@@ -239,7 +239,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "She studied hard, so she passed the exam.", "output": "**错误类型**: 连接词\n**改正**: She studied hard, so she passed the exam rather than failed.\n**解释**: 正确使用rather than来表达对比，增强句子逻辑性。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The photograph that displays in the exhibition is very artistic.", "output": "**错误类型**: 定语从句\n**改正**: The photograph that is displayed in the exhibition is very artistic.\n**解释**: 关系副词that引导的定语从句中缺少了be动词。"}
 {"instruction": "纠正以下句子的语法错误", "input": "He is researching of quantum physics.", "output": "**错误类型**: 介词\n**改正**: He is researching quantum physics.\n**解释**: 在提到研究某个学科时，不应使用of，而是直接使用学科名称。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Samantha enjoys gardening, but she don't like mowing the lawn.", "output": "**错误类型**: 连接词\n**改正**: Although Samantha enjoys gardening, she doesn't like mowing the lawn.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Samantha enjoys gardening, but she don't like mowing the lawn.", "output": "**错误类型**: 主谓一致\n**改正**: Although Samantha enjoys gardening, she doesn't like mowing the lawn.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The planning started last year, and it ended this year.", "output": "**错误类型**: 连接词\n**改正**: The planning started last year, yet it ended this year.\n**解释**: 使用yet来表达开始和结束之间的时间跨度，增强意外性。"}
 {"instruction": "纠正以下句子的语法错误", "input": "They complained he is playing too loud.", "output": "**错误类型**: 时态一致\n**改正**: They complained he was playing too loud.\n**解释**: 从句中的动词时态与主句不匹配。"}
 {"instruction": "纠正以下句子的语法错误", "input": "They chose to dine at the restaurant, but their friends didn't want to.", "output": "**错误类型**: 连接词\n**改正**: They chose to dine at the restaurant, but their friends preferred to eat at home.\n**解释**: 使用preferred to更精确表达朋友的选择，而不是简单的否定。"}
@@ -299,7 +299,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "He wondered if they will have arrived by then.", "output": "**错误类型**: 时态一致\n**改正**: He wondered if they would have arrived by then.\n**解释**: 从句中的动词时态与主句不匹配。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The troupe is performing at the venue.", "output": "**错误类型**: 主谓一致\n**改正**: The troupe are performing at the venue.\n**解释**: 集体名词作主语时，若强调个体，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Only she could tell the difference between the twins.", "output": "**错误类型**: 倒装句\n**改正**: Only could she tell the difference between the twins.\n**解释**: 没有使用倒装结构，句子缺少强调效果"}
-{"instruction": "纠正以下句子的语法错误", "input": "Mary appreciates art, but she don't like sculptures.", "output": "**错误类型**: 连接词\n**改正**: Although Mary appreciates art, she doesn't like sculptures.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Mary appreciates art, but she don't like sculptures.", "output": "**错误类型**: 主谓一致\n**改正**: Although Mary appreciates art, she doesn't like sculptures.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "She said she will study for the exam.", "output": "**错误类型**: 时态一致\n**改正**: She said she would study for the exam.\n**解释**: 间接引语中应使用过去将来时态。"}
 {"instruction": "纠正以下句子的语法错误", "input": "I heard he will start a new job next week.", "output": "**错误类型**: 时态一致\n**改正**: I heard he would start a new job next week.\n**解释**: 间接引语中应使用过去将来时态。"}
 {"instruction": "纠正以下句子的语法错误", "input": "They can buy a house, or they can rent an apartment.", "output": "**错误类型**: 连接词\n**改正**: They can either buy a house or rent an apartment.\n**解释**: 使用either...or...来表达两个选项，强调选择性。"}
@@ -355,7 +355,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "After the party, they cleaned up.", "output": "**错误类型**: 倒装句\n**改正**: Only after the party did they clean up.\n**解释**: 缺少倒装导致强调句式变形错误"}
 {"instruction": "纠正以下句子的语法错误", "input": "We thought about going to the opera, but our colleagues didn't want to.", "output": "**错误类型**: 连接词\n**改正**: We thought about going to the opera, but our colleagues preferred to go to a rock concert.\n**解释**: 使用preferred to更精确表达朋友的选择，而不是简单的否定。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Rarely they go to the concert.", "output": "**错误类型**: 倒装句\n**改正**: Rarely do they go to the concert.\n**解释**: 否定副词后应使用部分倒装，却未将助动词提前"}
-{"instruction": "纠正以下句子的语法错误", "input": "Todd enjoys reading, but he don't favor mystery novels.", "output": "**错误类型**: 连接词\n**改正**: Although Todd enjoys reading, he doesn't favor mystery novels.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Todd enjoys reading, but he don't favor mystery novels.", "output": "**错误类型**: 主谓一致\n**改正**: Although Todd enjoys reading, he doesn't favor mystery novels.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "I intended to have lunch at a cafe, but my friends didn't want to.", "output": "**错误类型**: 连接词\n**改正**: I intended to have lunch at a cafe, but my friends preferred to have a picnic in the park.\n**解释**: 使用preferred to更精确表达朋友的选择，而不是简单的否定。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The day started hot, and it ended with a cool breeze.", "output": "**错误类型**: 连接词\n**改正**: The day started hot, yet it ended with a cool breeze.\n**解释**: 使用yet来表达开始和结束之间的时间跨度，增强意外性。"}
 {"instruction": "纠正以下句子的语法错误", "input": "There is many staplers in the office.", "output": "**错误类型**: 主谓一致\n**改正**: There are many staplers in the office.\n**解释**: Many修饰可数名词复数，谓语动词应为复数形式。"}
@@ -370,7 +370,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The hotel which we stayed at during the trip was luxurious.", "output": "**错误类型**: 定语从句\n**改正**: The hotel that we stayed at during the trip was luxurious.\n**解释**: 关系代词which通常不用在限制性定语从句中。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The team is practicing, and they win games consistently.", "output": "**错误类型**: 连接词\n**改正**: The team is practicing, and they also win games consistently.\n**解释**: 此处应使用also来加强语气，而不是简单地用and。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The test was easy, so we didn't study.", "output": "**错误类型**: 连接词\n**改正**: The test was easy, so we didn't study rather than spent hours reviewing.\n**解释**: 正确使用rather than来表达对比，增强句子逻辑性。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Susan likes to travel, but she don't prefer camping.", "output": "**错误类型**: 连接词\n**改正**: Although Susan likes to travel, she doesn't prefer camping.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Susan likes to travel, but she don't prefer camping.", "output": "**错误类型**: 主谓一致\n**改正**: Although Susan likes to travel, she doesn't prefer camping.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Does she agree with you at those evaluations?", "output": "**错误类型**: 介词\n**改正**: Does she agree with you on those evaluations?\n**解释**: 在表达同意这些评估时，应使用on而不是at。"}
 {"instruction": "纠正以下句子的语法错误", "input": "After paying the bill, she left the restaurant.", "output": "**错误类型**: 倒装句\n**改正**: Only after paying the bill did she leave the restaurant.\n**解释**: 缺少倒装导致强调句式变形错误"}
 {"instruction": "纠正以下句子的语法错误", "input": "The pool of applicants is competing for the position.", "output": "**错误类型**: 主谓一致\n**改正**: The pool of applicants are competing for the position.\n**解释**: 集体名词作主语时，若强调个体，谓语动词用复数。"}
@@ -448,7 +448,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "She is receiving an award at a global firm.", "output": "**错误类型**: 介词\n**改正**: She is receiving an award in a global firm.\n**解释**: 在描述在公司内部的工作时，应使用in而不是at。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The forecast was grim, but they went to the mountains.", "output": "**错误类型**: 连接词\n**改正**: Despite the grim forecast, they went to the mountains.\n**解释**: 用despite来强调即使天气预报不佳，他们还是去了山区。"}
 {"instruction": "纠正以下句子的语法错误", "input": "He is teaching of chemistry.", "output": "**错误类型**: 介词\n**改正**: He is teaching chemistry.\n**解释**: 在提到研究某个学科时，不应使用of，而是直接使用学科名称。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Emily adores cats, but she don't like dogs.", "output": "**错误类型**: 连接词\n**改正**: Although Emily adores cats, she doesn't like dogs.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Emily adores cats, but she don't like dogs.", "output": "**错误类型**: 主谓一致\n**改正**: Although Emily adores cats, she doesn't like dogs.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "We intended to visit the museum, but our classmates didn't want to.", "output": "**错误类型**: 连接词\n**改正**: We intended to visit the museum, but our classmates preferred to visit the art gallery.\n**解释**: 使用preferred to更精确表达朋友的选择，而不是简单的否定。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The volunteer which helps at the food bank is kind.", "output": "**错误类型**: 定语从句\n**改正**: The volunteer who helps at the food bank is kind.\n**解释**: 错误滥用关系代词which，应使用who指代人。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The team is brainstorming at a consulting agency.", "output": "**错误类型**: 介词\n**改正**: The team is brainstorming in a consulting agency.\n**解释**: 在描述在公司内部的工作时，应使用in而不是at。"}
@@ -557,7 +557,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "At no point would they compromise their values.", "output": "**错误类型**: 倒装句\n**改正**: At no point do they compromise their values.\n**解释**: 此句应使用部分倒装，却使用了陈述句语序"}
 {"instruction": "纠正以下句子的语法错误", "input": "They are playing soccer, but they don't like the coach.", "output": "**错误类型**: 连接词\n**改正**: Although they are playing soccer, they don't like the coach.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Please water the lawn in it's hot outside.", "output": "**错误类型**: 介词\n**改正**: Please water the lawn when it's hot outside.\n**解释**: 介词错误，应使用when表示时间关系而不是in。"}
-{"instruction": "纠正以下句子的语法错误", "input": "The class is interesting, but he don't participate.", "output": "**错误类型**: 连接词\n**改正**: Although the class is interesting, he doesn't participate.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The class is interesting, but he don't participate.", "output": "**错误类型**: 主谓一致\n**改正**: Although the class is interesting, he doesn't participate.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "After the deadline, she submitted her work.", "output": "**错误类型**: 倒装句\n**改正**: Only after the deadline did she submit her work.\n**解释**: 缺少倒装导致强调句式变形错误"}
 {"instruction": "纠正以下句子的语法错误", "input": "Daniel is gifted to composing music.", "output": "**错误类型**: 介词\n**改正**: Daniel is gifted at composing music.\n**解释**: 描述在音乐上擅长应该使用at而不是to。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The game who we played yesterday was fun.", "output": "**错误类型**: 定语从句\n**改正**: The game that we played yesterday was fun.\n**解释**: 错误使用了疑问代词who，应使用关系代词that。"}
@@ -657,13 +657,13 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The class is preparing for the exam.", "output": "**错误类型**: 主谓一致\n**改正**: The class are preparing for the exam.\n**解释**: 集体名词作主语时，若强调个体，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "She is familiar of the new policy.", "output": "**错误类型**: 介词\n**改正**: She is familiar with the new policy.\n**解释**: 描述对某事物熟悉应该使用with而不是of。"}
 {"instruction": "纠正以下句子的语法错误", "input": "David is superior to the art of improvisation.", "output": "**错误类型**: 介词\n**改正**: David is superior at the art of improvisation.\n**解释**: 描述在音乐上擅长应该使用at而不是to。"}
-{"instruction": "纠正以下句子的语法错误", "input": "She enjoys reading, but she don't appreciate romance.", "output": "**错误类型**: 连接词\n**改正**: Although she enjoys reading, she doesn't appreciate romance.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She enjoys reading, but she don't appreciate romance.", "output": "**错误类型**: 主谓一致\n**改正**: Although she enjoys reading, she doesn't appreciate romance.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The congregation is singing hymns.", "output": "**错误类型**: 主谓一致\n**改正**: The congregation are singing hymns.\n**解释**: 集体名词作主语时，若强调个体，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The painter or the sculptor is displaying their work at the museum.", "output": "**错误类型**: 主谓一致\n**改正**: The painter or the sculptor are displaying their work at the museum.\n**解释**: 以or连接的两个主语，在不确定具体是哪一个时，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The report that presents at the meeting is very detailed.", "output": "**错误类型**: 定语从句\n**改正**: The report that is presented at the meeting is very detailed.\n**解释**: 关系副词that引导的定语从句中缺少了be动词。"}
 {"instruction": "纠正以下句子的语法错误", "input": "After submitting the application, she awaited the response.", "output": "**错误类型**: 倒装句\n**改正**: Only after submitting the application did she await the response.\n**解释**: 缺少倒装导致强调句式变形错误"}
 {"instruction": "纠正以下句子的语法错误", "input": "He said he will have finished his work by 5.", "output": "**错误类型**: 时态一致\n**改正**: He said he would have finished his work by 5.\n**解释**: 从句中的动词时态与主句不匹配。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He likes history, but he don't enjoy reading historical books.", "output": "**错误类型**: 连接词\n**改正**: Although he likes history, he doesn't enjoy reading historical books.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He likes history, but he don't enjoy reading historical books.", "output": "**错误类型**: 主谓一致\n**改正**: Although he likes history, he doesn't enjoy reading historical books.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "It was raining hard, but we went to play tennis.", "output": "**错误类型**: 连接词\n**改正**: Despite the hard rain, we went to play tennis.\n**解释**: 用despite来强调即使大雨倾盆，我们还决定去打网球。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Only Emily completed the task on time.", "output": "**错误类型**: 倒装句\n**改正**: Only on time did Emily complete the task.\n**解释**: 没有使用倒装结构，句子缺少强调效果"}
 {"instruction": "纠正以下句子的语法错误", "input": "The sales reps and I was presenting at the conference.", "output": "**错误类型**: 主谓一致\n**改正**: The sales reps and I were presenting at the conference.\n**解释**: 主语为复数，谓语动词应使用复数形式。"}
@@ -1001,7 +1001,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "Each of the waiters are serving the customers.", "output": "**错误类型**: 主谓一致\n**改正**: Each of the waiters is serving the customers.\n**解释**: Each作为主语时，谓语动词应与最近的名词一致。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The car which I saw in the parking lot is made by Toyota.", "output": "**错误类型**: 定语从句\n**改正**: The car that I saw in the parking lot is made by Toyota.\n**解释**: 错误地将限制性定语从句中的关系代词that换成了which。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The project was initiated with high hopes, and it ended in failure.", "output": "**错误类型**: 连接词\n**改正**: The project was initiated with high hopes, yet it ended in failure.\n**解释**: 使用yet来表达开始和结束之间的时间跨度，增强意外性。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Samantha likes to paint, but she don't favor acrylics.", "output": "**错误类型**: 连接词\n**改正**: Although Samantha likes to paint, she doesn't favor acrylics.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Samantha likes to paint, but she don't favor acrylics.", "output": "**错误类型**: 主谓一致\n**改正**: Although Samantha likes to paint, she doesn't favor acrylics.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The song which my friend introduced me to is very catchy.", "output": "**错误类型**: 定语从句\n**改正**: The song that my friend introduced me to is very catchy.\n**解释**: 关系代词which通常不用在限制性定语从句中。"}
 {"instruction": "纠正以下句子的语法错误", "input": "There is many cats in the neighborhood.", "output": "**错误类型**: 主谓一致\n**改正**: There are many cats in the neighborhood.\n**解释**: Many修饰可数名词复数，谓语动词应为复数形式。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Without a computer, we can't work remotely.", "output": "**错误类型**: 倒装句\n**改正**: Without a computer, we cannot work remotely.\n**解释**: 没有使用倒装结构，应该在否定副词后使用部分倒装"}
@@ -1225,7 +1225,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The island which I visited on my honeymoon is very romantic.", "output": "**错误类型**: 定语从句\n**改正**: The island that I visited on my honeymoon is very romantic.\n**解释**: 错误地将限制性定语从句中的关系代词that换成了which。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The police was delivering a lecture on public safety at the community center.", "output": "**错误类型**: 主谓一致\n**改正**: The police were delivering a lecture on public safety at the community center.\n**解释**: Police作为集合名词，强调多个个体时，用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Mia is adept to composing classical music.", "output": "**错误类型**: 介词\n**改正**: Mia is adept at composing classical music.\n**解释**: 描述在音乐上擅长应该使用at而不是to。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Kathy adores flowers, but she don't favor roses.", "output": "**错误类型**: 连接词\n**改正**: Although Kathy adores flowers, she doesn't favor roses.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Kathy adores flowers, but she don't favor roses.", "output": "**错误类型**: 主谓一致\n**改正**: Although Kathy adores flowers, she doesn't favor roses.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Each of the musicians are rehearsing for the concert.", "output": "**错误类型**: 主谓一致\n**改正**: Each of the musicians is rehearsing for the concert.\n**解释**: Each作为主语时，谓语动词应与最近的名词一致。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The books and the author was being discussed in class.", "output": "**错误类型**: 主谓一致\n**改正**: The books and the author were being discussed in class.\n**解释**: 主语为复数，谓语动词应使用复数形式。"}
 {"instruction": "纠正以下句子的语法错误", "input": "John is going to visit his grandmother in Boston on next Saturday.", "output": "**错误类型**: 介词\n**改正**: John is going to visit his grandmother in Boston next Saturday.\n**解释**: 表示将来时间的on被错误使用，next Saturday前不需要介词。"}
@@ -1239,7 +1239,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The documentary which we watched on Netflix was eye-opening.", "output": "**错误类型**: 定语从句\n**改正**: The documentary that we watched on Netflix was eye-opening.\n**解释**: 关系代词which通常不用在限制性定语从句中。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Please close the window in the wind gets strong.", "output": "**错误类型**: 介词\n**改正**: Please close the window when the wind gets strong.\n**解释**: 介词错误，应使用when表示时间关系而不是in。"}
 {"instruction": "纠正以下句子的语法错误", "input": "If I tried the dish, I like it a lot.", "output": "**错误类型**: 时态一致\n**改正**: If I tried the dish, I would like it a lot.\n**解释**: 条件句中主句应使用虚拟语气，即过去时。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He plays the piano, but he don't like Chopin.", "output": "**错误类型**: 连接词\n**改正**: Although he plays the piano, he doesn't like Chopin.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He plays the piano, but he don't like Chopin.", "output": "**错误类型**: 主谓一致\n**改正**: Although he plays the piano, he doesn't like Chopin.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Under no circumstances would he back down.", "output": "**错误类型**: 倒装句\n**改正**: Under no circumstances does he back down.\n**解释**: 此句应使用部分倒装，却使用了陈述句语序"}
 {"instruction": "纠正以下句子的语法错误", "input": "Not until the presentation was given did he show her slides.", "output": "**错误类型**: 倒装句\n**改正**: Not until the presentation was given did he show his slides.\n**解释**: 代词使用错误，应指向自身，使用了第三人称单数"}
 {"instruction": "纠正以下句子的语法错误", "input": "The pair were planning their vacation to the beach.", "output": "**错误类型**: 主谓一致\n**改正**: The pair was planning their vacation to the beach.\n**解释**: Family作为集合名词，若作整体看待，谓语动词用单数。"}
@@ -1258,7 +1258,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "Please pick up the mail in you pass by the mailbox.", "output": "**错误类型**: 介词\n**改正**: Please pick up the mail when you pass by the mailbox.\n**解释**: 介词错误，应使用when表示时间关系而不是in。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Only he answered the question correctly.", "output": "**错误类型**: 倒装句\n**改正**: Only correctly did he answer the question.\n**解释**: 没有使用倒装结构，句子缺少强调效果"}
 {"instruction": "纠正以下句子的语法错误", "input": "The instructions are written in English language.", "output": "**错误类型**: 介词\n**改正**: The instructions are written in English.\n**解释**: 在这种情况下，language不需要介词in，直接用English即可。"}
-{"instruction": "纠正以下句子的语法错误", "input": "Lucy loves animals, but she don't like snakes.", "output": "**错误类型**: 连接词\n**改正**: Although Lucy loves animals, she doesn't like snakes.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Lucy loves animals, but she don't like snakes.", "output": "**错误类型**: 主谓一致\n**改正**: Although Lucy loves animals, she doesn't like snakes.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Scarcely I had sat down when the phone rang.", "output": "**错误类型**: 倒装句\n**改正**: Scarcely had I sat down when the phone rang.\n**解释**: 完全倒装位置错误，助动词应置于主语前"}
 {"instruction": "纠正以下句子的语法错误", "input": "The match started well, and it ended in a tie.", "output": "**错误类型**: 连接词\n**改正**: The match started well, yet it ended in a tie.\n**解释**: 使用yet来表达开始和结束之间的时间跨度，增强意外性。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The book is a bestseller, because it has an exciting storyline.", "output": "**错误类型**: 连接词\n**改正**: The book is a bestseller since it has an exciting storyline.\n**解释**: 使用since来引导原因状语从句，表示因果关系。"}
@@ -1383,7 +1383,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The interviews is revealing.", "output": "**错误类型**: 主谓一致\n**改正**: The interviews are revealing.\n**解释**: Interviews指的是不同访谈时，应视为复数，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The house which we moved into last month was a mess.", "output": "**错误类型**: 定语从句\n**改正**: The house that we moved into last month was a mess.\n**解释**: 错误地使用了which，应使用that作为限制性定语从句的关系代词。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Never should she back down from the argument.", "output": "**错误类型**: 倒装句\n**改正**: Never does she back down from the argument.\n**解释**: 此句应使用部分倒装，却使用了陈述句语序"}
-{"instruction": "纠正以下句子的语法错误", "input": "She likes to bake, but she don't enjoy making cookies.", "output": "**错误类型**: 连接词\n**改正**: Although she likes to bake, she doesn't enjoy making cookies.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She likes to bake, but she don't enjoy making cookies.", "output": "**错误类型**: 主谓一致\n**改正**: Although she likes to bake, she doesn't enjoy making cookies.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The idea that brainstorms in the meeting is very innovative.", "output": "**错误类型**: 定语从句\n**改正**: The idea that is brainstormed in the meeting is very innovative.\n**解释**: 关系副词that引导的定语从句中缺少了be动词。"}
 {"instruction": "纠正以下句子的语法错误", "input": "They walk at the beach for two hours.", "output": "**错误类型**: 介词\n**改正**: They walk for two hours at the beach.\n**解释**: 介词at错误地放在了时间之前，应放在时间之后。"}
 {"instruction": "纠正以下句子的语法错误", "input": "She was late, so she missed her appointment.", "output": "**错误类型**: 连接词\n**改正**: She was late, so she missed her appointment rather than arrived on time.\n**解释**: 正确使用rather than来表达对比，增强句子逻辑性。"}
@@ -1422,7 +1422,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "Could we agree with her at these issues?", "output": "**错误类型**: 介词\n**改正**: Could we agree with her on these issues?\n**解释**: 在表达同意这些问题时，应使用on而不是at。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The engineer designed the building, and he presented the plans.", "output": "**错误类型**: 连接词\n**改正**: The engineer designed the building, so he presented the plans.\n**解释**: 使用so来表达因果关系，说明设计建筑是展示计划的原因。"}
 {"instruction": "纠正以下句子的语法错误", "input": "After the surgery, she began her recovery.", "output": "**错误类型**: 倒装句\n**改正**: Only after the surgery did she begin her recovery.\n**解释**: 缺少倒装导致强调句式变形错误"}
-{"instruction": "纠正以下句子的语法错误", "input": "She likes to dance, but she don't like to sing.", "output": "**错误类型**: 连接词\n**改正**: Although she likes to dance, she doesn't like to sing.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She likes to dance, but she don't like to sing.", "output": "**错误类型**: 主谓一致\n**改正**: Although she likes to dance, she doesn't like to sing.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "A cat or a dog is sleeping in the living room.", "output": "**错误类型**: 主谓一致\n**改正**: A cat or a dog are sleeping in the living room.\n**解释**: 以or连接的两个主语，在不明确是哪一个时，谓语动词用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The patient recovered quickly, because the treatment was effective.", "output": "**错误类型**: 连接词\n**改正**: The patient recovered quickly since the treatment was effective.\n**解释**: 使用since来引导原因状语从句，表示因果关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Each of the children are playing in the park.", "output": "**错误类型**: 主谓一致\n**改正**: Each of the children is playing in the park.\n**解释**: Each作为主语时，谓语动词应与最近的名词一致。"}
@@ -1476,7 +1476,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The player whom scored the winning goal is our team's hero.", "output": "**错误类型**: 定语从句\n**改正**: The player who scored the winning goal is our team's hero.\n**解释**: 关系代词whom用于限定性定语从句的宾语位置，但常用who代替。"}
 {"instruction": "纠正以下句子的语法错误", "input": "She prepares at the meal for an hour.", "output": "**错误类型**: 介词\n**改正**: She prepares for an hour at the meal.\n**解释**: 介词at错误地放在了时间之前，应放在时间之后。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The painter whom created this masterpiece is world-renowned.", "output": "**错误类型**: 定语从句\n**改正**: The painter who created this masterpiece is world-renowned.\n**解释**: 关系代词whom用于限定性定语从句的宾语位置，但常用who代替。"}
-{"instruction": "纠正以下句子的语法错误", "input": "She likes to draw, but she don't like charcoal.", "output": "**错误类型**: 连接词\n**改正**: Although she likes to draw, she doesn't like charcoal.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She likes to draw, but she don't like charcoal.", "output": "**错误类型**: 主谓一致\n**改正**: Although she likes to draw, she doesn't like charcoal.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "He is leading a project team at a logistics firm.", "output": "**错误类型**: 介词\n**改正**: He is leading a project team in a logistics firm.\n**解释**: 在描述在公司内部的工作时，应使用in而不是at。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Under no condition will my team surrender.", "output": "**错误类型**: 倒装句\n**改正**: Under no condition does my team surrender.\n**解释**: 此句应使用部分倒装，却使用了陈述句语序"}
 {"instruction": "纠正以下句子的语法错误", "input": "Each of the forests are rich in biodiversity.", "output": "**错误类型**: 主谓一致\n**改正**: Each of the forests is rich in biodiversity.\n**解释**: Each作为主语时，谓语动词应与最近的名词一致。"}
@@ -1593,7 +1593,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "I wanted to go to the art exhibition, but my friends didn't want to.", "output": "**错误类型**: 连接词\n**改正**: I wanted to go to the art exhibition, but my friends preferred to go to the photography show.\n**解释**: 使用preferred to更精确表达朋友的选择，而不是简单的否定。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The police was responding to a domestic violence call on Friday evening.", "output": "**错误类型**: 主谓一致\n**改正**: The police were responding to a domestic violence call on Friday evening.\n**解释**: Police作为集合名词，强调多个个体时，用复数。"}
 {"instruction": "纠正以下句子的语法错误", "input": "If we spoke up, we prevent the accident.", "output": "**错误类型**: 时态一致\n**改正**: If we spoke up, we would prevent the accident.\n**解释**: 条件句中主句应使用虚拟语气，即过去时。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He likes working out, but he don't like jogging.", "output": "**错误类型**: 连接词\n**改正**: Although he likes working out, he doesn't like jogging.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He likes working out, but he don't like jogging.", "output": "**错误类型**: 主谓一致\n**改正**: Although he likes working out, he doesn't like jogging.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "She was looking forward to a holiday that will start in December.", "output": "**错误类型**: 时态一致\n**改正**: She was looking forward to a holiday that would start in December.\n**解释**: 虚拟语气中时态不匹配，应为过去将来时。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Not until the trip was planned did she pack his suitcase.", "output": "**错误类型**: 倒装句\n**改正**: Not until the trip was planned did she pack her suitcase.\n**解释**: 代词使用错误，应指向自身，使用了第三人称单数"}
 {"instruction": "纠正以下句子的语法错误", "input": "Not until the meeting started did I see her face.", "output": "**错误类型**: 倒装句\n**改正**: Not until the meeting started did I see my face.\n**解释**: 代词使用错误，应指向自身，使用了第三人称单数"}
@@ -1750,7 +1750,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "She is completing a training program at an engineering firm.", "output": "**错误类型**: 介词\n**改正**: She is completing a training program in an engineering firm.\n**解释**: 在描述在公司内部的工作时，应使用in而不是at。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The narrator which tells the story is engaging.", "output": "**错误类型**: 定语从句\n**改正**: The narrator who tells the story is engaging.\n**解释**: 错误滥用关系代词which，应使用who指代人。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The police was coordinating the emergency response to the hurricane.", "output": "**错误类型**: 主谓一致\n**改正**: The police were coordinating the emergency response to the hurricane.\n**解释**: Police作为集合名词，强调多个个体时，用复数。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He is a doctor, but he don't have time for hobbies.", "output": "**错误类型**: 连接词\n**改正**: Although he is a doctor, he doesn't have time for hobbies.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He is a doctor, but he don't have time for hobbies.", "output": "**错误类型**: 主谓一致\n**改正**: Although he is a doctor, he doesn't have time for hobbies.\n**解释**: 使用了不恰当的连接词，应该用although来表达转折关系。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Without a hammer, we can't build a house.", "output": "**错误类型**: 倒装句\n**改正**: Without a hammer, we cannot build a house.\n**解释**: 没有使用倒装结构，应该在否定副词后使用部分倒装"}
 {"instruction": "纠正以下句子的语法错误", "input": "Don't forget to unplug the iron in you finish using it.", "output": "**错误类型**: 介词\n**改正**: Don't forget to unplug the iron when you finish using it.\n**解释**: 介词错误，应使用when表示时间关系而不是in。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The therapist whom I saw last week is very understanding.", "output": "**错误类型**: 定语从句\n**改正**: The therapist who I saw last week is very understanding.\n**解释**: 关系代词whom用于限定性定语从句的宾语位置，但常用who代替。"}
