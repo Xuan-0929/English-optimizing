@@ -1,0 +1,16 @@
+# Core training stack (SFT v1)
+torch>=2.2.0
+transformers>=4.46.0
+datasets>=2.19.0
+peft>=0.11.0
+accelerate>=0.30.0
+bitsandbytes>=0.43.0
+safetensors>=0.4.3
+sentencepiece>=0.2.0
+
+# Data generation / filtering utilities
+openai>=1.40.0
+python-dotenv>=1.0.1
+
+# Optional UI scripts in this repo
+gradio>=4.44.0

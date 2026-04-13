@@ -1,5 +1,38 @@
 # 英语语法纠错项目 - 存储路径与维护指南
 
+## SFT v1 快速开始（当前可直接运行）
+
+下面是当前仓库可直接跑通的 SFT v1 流程。
+
+1. 准备清洗并切分训练数据
+```bash
+python3 train/prepare_sft_data.py \
+  --input data/sft_train.jsonl \
+  --output-dir data/processed
+```
+
+2. 运行 SFT 训练（Qwen + LoRA 4bit）
+```bash
+python3 train/train_sft.py \
+  --train-data data/processed/sft_train_v1_train.jsonl \
+  --val-data data/processed/sft_train_v1_val.jsonl \
+  --output-dir outputs/sft_v1
+```
+
+3. 对比 base 与 LoRA 输出
+```bash
+python3 evaluate_lora.py \
+  --lora-path outputs/sft_v1/final \
+  --output outputs/sft_v1/eval_compare.json
+```
+
+说明：
+- `train/train_sft.py` 会自动尝试本地模型路径：
+  - `./models/Qwen2.5-3B-Instruct`
+  - `./models/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1`
+- 如你的模型在其他目录，手动传 `--model-path <path>` 即可。
+- 训练产物默认在 `outputs/sft_v1/`。
+
 ## 项目结构
 
 ```
