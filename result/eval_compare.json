@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "input": "He said he goes to the store yesterday.",
+    "base_output": "He said he went to the store yesterday.",
+    "lora_output": "**错误类型**: 时态一致\n**改正**: He said he went to the store yesterday.\n**解释**: 从句中的动词时态"
+  },
+  {
+    "id": 2,
+    "input": "The book which you recommended it is great.",
+    "base_output": "The sentence should be corrected to: \"The book that you recommended is great.\" \n\nIn this corrected version:\n- \"which\" is replaced with \"that\"",
+    "lora_output": "**错误类型**: 定语从句\n**改正**: The book that you recommended is great.\n**解释**: 错误地使用了代词"
+  },
+  {
+    "id": 3,
+    "input": "She don't like apples.",
+    "base_output": "她不喜欢苹果。这句话没有语法错误，但是更正一下标点符号，可以更准确地表达：\"她不喜欢苹果。\" 如果是要强调",
+    "lora_output": "**错误类型**: 介词\n**改正**: She doesn't like apples.\n**解释**: 描述对事物的喜欢不需要介词，直接用"
+  },
+  {
+    "id": 4,
+    "input": "I have been to the park last week.",
+    "base_output": "The correct sentence would be: \"I went to the park last week.\" or \"I have been to the park recently.\" Note that the first one is more",
+    "lora_output": "**错误类型**: 时态一致\n**改正**: I went to the park last week.\n**解释**: 从句中动词应与主"
+  },
+  {
+    "id": 5,
+    "input": "They is playing football now.",
+    "base_output": "They are playing football now.",
+    "lora_output": "**错误类型**: 主谓一致\n**改正**: They are playing football now.\n**解释**: 集体名词作主语时，若强调"
+  },
+  {
+    "id": 6,
+    "input": "My sister go to school every day.",
+    "base_output": "My sister goes to school every day.",
+    "lora_output": "**错误类型**: 时态一致\n**改正**: My sister goes to school every day.\n**解释**: 从句中动词应与主"
+  },
+  {
+    "id": 7,
+    "input": "We will meeting tomorrow.",
+    "base_output": "正确的句子应该是： \"We will meet tomorrow.\" 或者 \"We will have a meeting tomorrow.\" 请根据实际需要选择合适的表达。",
+    "lora_output": "**错误类型**: 时态一致\n**改正**: We will meet tomorrow.\n**解释**: 从句中动词应与主句保持一致"
+  }
+]
