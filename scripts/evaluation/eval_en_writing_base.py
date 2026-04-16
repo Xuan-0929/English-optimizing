@@ -4,7 +4,7 @@
 用本地基座模型评估「中文原意 -> 学习者英文」的表达质量。
 
 示例:
-  .venv/Scripts/python.exe eval_en_writing_base.py --zh "我想下周请假两天回老家。" --en "I want to ask two days leave next week to go back my hometown."
+  .venv/Scripts/python.exe scripts/evaluation/eval_en_writing_base.py --zh "我想下周请假两天回老家。" --en "I want to ask two days leave next week to go back my hometown."
 """
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 
 def _project_root() -> Path:
-    """脚本所在目录视为项目根，避免依赖终端当前工作目录。"""
-    return Path(__file__).resolve().parent
+    """返回仓库根目录，避免依赖终端当前工作目录。"""
+    return Path(__file__).resolve().parents[2]
 
 
 def _is_model_dir(path: Path) -> bool:
