@@ -1,0 +1,20 @@
+{
+  "input_file": "data/processed_v5/sft_train_clean_v5.jsonl",
+  "total_rows": 1139,
+  "kept_rows": 1132,
+  "removed_rows": 7,
+  "removed_ratio": 0.0061,
+  "train_rows": 1075,
+  "val_rows": 57,
+  "removed_reason_counts": {
+    "manual_drop_ambiguous_tense_shift": 7
+  },
+  "outputs": {
+    "clean_v6": "data/processed_v6/sft_train_clean_v6.jsonl",
+    "train_v6": "data/processed_v6/sft_train_v6_train.jsonl",
+    "val_v6": "data/processed_v6/sft_train_v6_val.jsonl",
+    "removed_jsonl": "data/review_pack/removed_high_risk_v6.jsonl",
+    "removed_csv": "data/review_pack/removed_high_risk_v6.csv",
+    "manual_ledger": "data/review_pack/manual_review_ledger_v6.csv"
+  }
+}

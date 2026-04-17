@@ -1,0 +1,8 @@
+sample_id,source_index,error_type,input,current_correction,remove_reasons,review_notes
+V6R0001,67,时态一致,I remembered he was planning to go shopping.,I remembered he had planned to go shopping.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
+V6R0002,142,时态一致,He told me he had been playing soccer.,He told me he plays soccer.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
+V6R0003,210,时态一致,I knew she was cooking dinner at her house.,I knew she cooked dinner at her house.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
+V6R0004,297,时态一致,I knew she had been cooking all day.,I knew she was cooking all day.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
+V6R0005,644,时态一致,I knew she would have finished her work.,I knew she had finished her work.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
+V6R0006,702,时态一致,He told us he would be reading the book.,He told us he was reading the book.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
+V6R0007,955,时态一致,They complained he would be too loud.,They complained he was too loud.,manual_drop_ambiguous_tense_shift,时态改动跨越过大（进行体/完成体被改写为一般时），难保证 gold 唯一性，移出训练集。
