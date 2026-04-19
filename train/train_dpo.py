@@ -66,12 +66,12 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--model-path", default=None, help="Local base model path.")
     p.add_argument(
         "--sft-adapter-path",
-        default="result/sft_v6_3/final",
+        default="outputs/sft_v6_3/final",
         help="Path to SFT LoRA adapter used as DPO starting point.",
     )
     p.add_argument("--train-data", default="data/processed_v6/dpo_train_v1.jsonl")
     p.add_argument("--val-data", default="data/processed_v6/dpo_val_v1.jsonl")
-    p.add_argument("--output-dir", default="result/dpo_v1")
+    p.add_argument("--output-dir", default="outputs/dpo_v1")
     p.add_argument("--max-length", type=int, default=768)
     p.add_argument("--num-epochs", type=int, default=1)
     p.add_argument("--batch-size", type=int, default=1)
@@ -209,4 +209,3 @@ def main() -> None:
 if __name__ == "__main__":
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     main()
-
