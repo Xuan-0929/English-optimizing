@@ -1,0 +1,29 @@
+{"instruction": "纠正以下句子的语法错误", "input": "The project is still in early stage.", "output": "**错误类型**: 主谓一致\n**改正**: The project is still in its early stages.\n**解释**: 固定表达更自然为 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The method is in early stages.", "output": "**错误类型**: 主谓一致\n**改正**: The method is in its early stages.\n**解释**: 固定表达通常使用 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The product is in early stage.", "output": "**错误类型**: 主谓一致\n**改正**: The product is in its early stages.\n**解释**: 固定表达更自然为 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The technology is still in early stages.", "output": "**错误类型**: 主谓一致\n**改正**: The technology is still in its early stages.\n**解释**: 固定表达通常使用 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Our plan is in early stages now.", "output": "**错误类型**: 主谓一致\n**改正**: Our plan is in its early stages now.\n**解释**: 固定表达更自然为 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The policy remains in early stage.", "output": "**错误类型**: 主谓一致\n**改正**: The policy remains in its early stages.\n**解释**: 固定表达通常使用 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The treatment is in early stages of testing.", "output": "**错误类型**: 主谓一致\n**改正**: The treatment is in its early stages of testing.\n**解释**: 固定表达更自然为 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She raised hand to ask a question.", "output": "**错误类型**: 介词\n**改正**: She raised her hand to ask a question.\n**解释**: 名词 hand 前需使用物主代词 her。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He shook head and walked away.", "output": "**错误类型**: 介词\n**改正**: He shook his head and walked away.\n**解释**: 名词 head 前需使用物主代词 his。"}
+{"instruction": "纠正以下句子的语法错误", "input": "I brushed teeth before bed.", "output": "**错误类型**: 介词\n**改正**: I brushed my teeth before bed.\n**解释**: teeth 前通常需要物主代词 my。"}
+{"instruction": "纠正以下句子的语法错误", "input": "They nodded heads in agreement.", "output": "**错误类型**: 介词\n**改正**: They nodded their heads in agreement.\n**解释**: heads 前需使用物主代词 their。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She closed eyes and took a deep breath.", "output": "**错误类型**: 介词\n**改正**: She closed her eyes and took a deep breath.\n**解释**: eyes 前需使用物主代词 her。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He hurt leg during the game.", "output": "**错误类型**: 介词\n**改正**: He hurt his leg during the game.\n**解释**: leg 前需使用物主代词 his。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She bought umbrella yesterday.", "output": "**错误类型**: 介词\n**改正**: She bought an umbrella yesterday.\n**解释**: 可数名词单数 umbrella 前需加冠词 an。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He is honest person.", "output": "**错误类型**: 介词\n**改正**: He is an honest person.\n**解释**: honest 首音为元音音素，前用 an。"}
+{"instruction": "纠正以下句子的语法错误", "input": "It was useful advice.", "output": "**错误类型**: 主谓一致\n**改正**: It was useful advice.\n**解释**: advice 为不可数名词，此句无需冠词。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She gave me an advice.", "output": "**错误类型**: 介词\n**改正**: She gave me some advice.\n**解释**: advice 为不可数名词，不与 an 连用。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He did a research on climate change.", "output": "**错误类型**: 介词\n**改正**: He did research on climate change.\n**解释**: research 常作不可数名词，不与 a 连用。"}
+{"instruction": "纠正以下句子的语法错误", "input": "They conducted many researches on language learning.", "output": "**错误类型**: 介词\n**改正**: They conducted much research on language learning.\n**解释**: research 通常作不可数名词，搭配 much research。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He is in hospital for a checkup.", "output": "**错误类型**: 介词\n**改正**: He is in the hospital for a checkup.\n**解释**: 表示具体医院这一场景更自然用 in the hospital。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She went to school to meet the principal yesterday.", "output": "**错误类型**: 介词\n**改正**: She went to the school to meet the principal yesterday.\n**解释**: 表示去学校建筑办事，常用 to the school。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The meeting is at next Monday.", "output": "**错误类型**: 介词\n**改正**: The meeting is next Monday.\n**解释**: next Monday 前通常不加介词 at。"}
+{"instruction": "纠正以下句子的语法错误", "input": "They arrived to the airport late.", "output": "**错误类型**: 介词\n**改正**: They arrived at the airport late.\n**解释**: arrive 与地点搭配通常用 at/in，不用 to。"}
+{"instruction": "纠正以下句子的语法错误", "input": "We discussed about the issue yesterday.", "output": "**错误类型**: 介词\n**改正**: We discussed the issue yesterday.\n**解释**: discuss 为及物动词，后面不加 about。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She married with him in 2018.", "output": "**错误类型**: 介词\n**改正**: She married him in 2018.\n**解释**: marry 为及物动词，后面不加 with。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The number of students are increasing.", "output": "**错误类型**: 主谓一致\n**改正**: The number of students is increasing.\n**解释**: 主语中心词为 number，谓语用单数 is。"}
+{"instruction": "纠正以下句子的语法错误", "input": "A number of students is absent today.", "output": "**错误类型**: 主谓一致\n**改正**: A number of students are absent today.\n**解释**: a number of + 复数名词，谓语通常用复数 are。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Each of the students have a laptop.", "output": "**错误类型**: 主谓一致\n**改正**: Each of the students has a laptop.\n**解释**: Each 作主语时谓语用单数 has。"}
+{"instruction": "纠正以下句子的语法错误", "input": "Either of the answers are acceptable.", "output": "**错误类型**: 主谓一致\n**改正**: Either of the answers is acceptable.\n**解释**: Either 作主语时谓语通常用单数 is。"}
