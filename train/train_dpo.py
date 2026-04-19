@@ -186,7 +186,6 @@ def main() -> None:
         eval_steps=args.eval_steps,
         eval_strategy="steps",
         save_strategy="steps",
-        max_prompt_length=max(64, args.max_length // 2),
         max_length=args.max_length,
         beta=args.beta,
         report_to="none",
