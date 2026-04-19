@@ -61,6 +61,17 @@ def _ensure_torch_set_submodule() -> None:
     nn.Module.set_submodule = set_submodule  # type: ignore[method-assign]
 
 
+def _patch_trl_fsdp_module_alias() -> None:
+    """TRL expects ``FSDPModule`` in ``torch.distributed.fsdp``; some builds (e.g. 2.5.x on Windows) only define it under ``_composable``."""
+    import torch.distributed.fsdp as fsdp_pkg
+
+    if getattr(fsdp_pkg, "FSDPModule", None) is not None:
+        return
+    from torch.distributed._composable.fsdp import FSDPModule
+
+    fsdp_pkg.FSDPModule = FSDPModule  # type: ignore[attr-defined]
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Train DPO on top of SFT LoRA adapter.")
     p.add_argument("--model-path", default=None, help="Local base model path.")
@@ -93,6 +104,8 @@ def main() -> None:
     import torch
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+    _patch_trl_fsdp_module_alias()
     from trl import DPOConfig, DPOTrainer
 
     _ensure_torch_set_submodule()
