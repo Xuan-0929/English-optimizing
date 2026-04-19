@@ -61,6 +61,23 @@ def _ensure_torch_set_submodule() -> None:
     nn.Module.set_submodule = set_submodule  # type: ignore[method-assign]
 
 
+def _dpo_fp16_bf16_flags() -> tuple[bool, bool]:
+    """Return (fp16, bf16) for TrainingArguments.
+
+    TRL's DPOTrainer casts QLoRA trainable params to bfloat16 (see trl DPOTrainer). Using
+    fp16=True enables GradScaler.unscale_, whose CUDA op does not handle bf16 gradients on
+    some Windows/driver setups. Prefer bf16=True when the GPU supports it (no FP16 scaler).
+    """
+    import torch
+    from transformers.utils.import_utils import is_torch_bf16_gpu_available
+
+    if not torch.cuda.is_available():
+        return False, False
+    if is_torch_bf16_gpu_available():
+        return False, True
+    return False, False
+
+
 def _patch_trl_fsdp_module_alias() -> None:
     """TRL expects ``FSDPModule`` in ``torch.distributed.fsdp``; some builds (e.g. 2.5.x on Windows) only define it under ``_composable``."""
     import torch.distributed.fsdp as fsdp_pkg
@@ -173,6 +190,7 @@ def main() -> None:
     train_ds = Dataset.from_list(train_rows)
     val_ds = Dataset.from_list(val_rows)
 
+    fp16_flag, bf16_flag = _dpo_fp16_bf16_flags()
     dpo_args = DPOConfig(
         output_dir=str(output_dir),
         num_train_epochs=args.num_epochs,
@@ -190,7 +208,8 @@ def main() -> None:
         beta=args.beta,
         report_to="none",
         remove_unused_columns=False,
-        fp16=torch.cuda.is_available(),
+        fp16=fp16_flag,
+        bf16=bf16_flag,
         seed=args.seed,
     )
 
