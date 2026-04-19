@@ -1,9 +1,9 @@
 {"instruction": "纠正以下句子的语法错误", "input": "Sarah is planning to visit the Eiffel Tower on next Friday.", "output": "**错误类型**: 介词\n**改正**: Sarah is planning to visit the Eiffel Tower next Friday.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `on -> ∅`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The websites is popular.", "output": "**错误类型**: 主谓一致\n**改正**: The websites are popular.\n**解释**: 主语和谓语需要在人称或单复数上保持一致，本句已将 `is -> are`。"}
-{"instruction": "纠正以下句子的语法错误", "input": "The project is still in early stage.", "output": "**错误类型**: 主谓一致\n**改正**: The project is still in its early stages.\n**解释**: 固定表达更自然为 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She raised hand to ask a question.", "output": "**错误类型**: 介词\n**改正**: She raised her hand to ask a question.\n**解释**: 名词 hand 前需使用物主代词 her。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The doctors and the nurse was providing care for the patient.", "output": "**错误类型**: 主谓一致\n**改正**: The doctors and the nurse were providing care for the patient.\n**解释**: 主语和谓语需要在人称或单复数上保持一致，本句已将 `was -> were`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Jane will be attending a conference in San Francisco on next Tuesday.", "output": "**错误类型**: 介词\n**改正**: Jane will be attending a conference in San Francisco next Tuesday.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `on -> ∅`。"}
-{"instruction": "纠正以下句子的语法错误", "input": "He is honest person.", "output": "**错误类型**: 介词\n**改正**: He is an honest person.\n**解释**: honest 首音为元音音素，前用 an。"}
+{"instruction": "纠正以下句子的语法错误", "input": "She married with him in 2018.", "output": "**错误类型**: 介词\n**改正**: She married him in 2018.\n**解释**: marry 为及物动词，后面不加 with。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Remember to put on your coat in you go outside.", "output": "**错误类型**: 介词\n**改正**: Remember to put on your coat when you go outside.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `in -> when`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "We are well-versed of the new procedure.", "output": "**错误类型**: 介词\n**改正**: We are well-versed with the new procedure.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `of -> with`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "On weekends, they use to go fishing at the lake.", "output": "**错误类型**: 时态一致\n**改正**: On weekends, they used to go fishing at the lake.\n**解释**: 根据主句语境与时间关系调整时态，本句已将 `use -> used`。"}
@@ -25,11 +25,11 @@
 {"instruction": "纠正以下句子的语法错误", "input": "If we followed the map, we reached the destination.", "output": "**错误类型**: 时态一致\n**改正**: If we followed the map, we would reach the destination.\n**解释**: 根据主句语境与时间关系调整时态，本句已将 `reached -> would reach`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The cake which my mother baked was delicious.", "output": "**错误类型**: 定语从句\n**改正**: The cake that my mother baked was delicious.\n**解释**: 定语从句中关系词或从句结构需与先行词匹配，本句已将 `which -> that`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "I am familiar of his story.", "output": "**错误类型**: 介词\n**改正**: I am familiar with his story.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `of -> with`。"}
-{"instruction": "纠正以下句子的语法错误", "input": "They arrived to the airport late.", "output": "**错误类型**: 介词\n**改正**: They arrived at the airport late.\n**解释**: arrive 与地点搭配通常用 at/in，不用 to。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The law that explains in class is difficult.", "output": "**错误类型**: 定语从句\n**改正**: The law that is explained in class is difficult.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is explained。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Was she able to agree with him at this hypothesis?", "output": "**错误类型**: 介词\n**改正**: Was she able to agree with him on this hypothesis?\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `at -> on`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The store who I go to for groceries is closing.", "output": "**错误类型**: 定语从句\n**改正**: The store that I go to for groceries is closing.\n**解释**: 定语从句中关系词或从句结构需与先行词匹配，本句已将 `who -> that`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "There is many balls on the playground.", "output": "**错误类型**: 主谓一致\n**改正**: There are many balls on the playground.\n**解释**: 主语和谓语需要在人称或单复数上保持一致，本句已将 `is -> are`。"}
-{"instruction": "纠正以下句子的语法错误", "input": "The policy remains in early stage.", "output": "**错误类型**: 主谓一致\n**改正**: The policy remains in its early stages.\n**解释**: 固定表达通常使用 in its early stages。"}
+{"instruction": "纠正以下句子的语法错误", "input": "He hurt leg during the game.", "output": "**错误类型**: 介词\n**改正**: He hurt his leg during the game.\n**解释**: leg 前需使用物主代词 his。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The child which is playing in the park is happy.", "output": "**错误类型**: 定语从句\n**改正**: The child who is playing in the park is happy.\n**解释**: 定语从句中关系词或从句结构需与先行词匹配，本句已将 `which -> who`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The flower which I picked from the garden is very fragrant.", "output": "**错误类型**: 定语从句\n**改正**: The flower that I picked from the garden is very fragrant.\n**解释**: 定语从句中关系词或从句结构需与先行词匹配，本句已将 `which -> that`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "A boy or a girl is bringing the ball to the playground.", "output": "**错误类型**: 主谓一致\n**改正**: A boy or a girl are bringing the ball to the playground.\n**解释**: 主语和谓语需要在人称或单复数上保持一致，本句已将 `is -> are`。"}
@@ -38,7 +38,7 @@
 {"instruction": "纠正以下句子的语法错误", "input": "The witness that he testified in court was questioned.", "output": "**错误类型**: 定语从句\n**改正**: The witness who testified in court was questioned.\n**解释**: 定语从句中关系词或从句结构需与先行词匹配，本句已将 `that he -> who`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The students and their teacher was working on a project.", "output": "**错误类型**: 主谓一致\n**改正**: The students and their teacher were working on a project.\n**解释**: 主语和谓语需要在人称或单复数上保持一致，本句已将 `was -> were`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "I am very familiar of her painting style.", "output": "**错误类型**: 介词\n**改正**: I am very familiar with her painting style.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `of -> with`。"}
-{"instruction": "纠正以下句子的语法错误", "input": "The meeting is at next Monday.", "output": "**错误类型**: 介词\n**改正**: The meeting is next Monday.\n**解释**: next Monday 前通常不加介词 at。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The article that teaches in class is useful.", "output": "**错误类型**: 定语从句\n**改正**: The article that is taught in class is useful.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is taught。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Students are debating of law and society.", "output": "**错误类型**: 介词\n**改正**: Students are debating law and society.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `of -> ∅`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "The beach that we visited it during our vacation was beautiful.", "output": "**错误类型**: 定语从句\n**改正**: The beach that we visited during our vacation was beautiful.\n**解释**: 定语从句中关系词或从句结构需与先行词匹配，本句已将 `it -> ∅`。"}
 {"instruction": "纠正以下句子的语法错误", "input": "Please put the dishes away in you finish eating.", "output": "**错误类型**: 介词\n**改正**: Please put the dishes away when you finish eating.\n**解释**: 该处应使用固定搭配或更自然的介词结构，本句已将 `in -> when`。"}

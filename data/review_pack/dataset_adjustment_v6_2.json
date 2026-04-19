@@ -1,0 +1,20 @@
+{
+  "removed_count": 10,
+  "removed_inputs": [
+    "The project is still in early stage.",
+    "The method is in early stages.",
+    "The product is in early stage.",
+    "The technology is still in early stages.",
+    "Our plan is in early stages now.",
+    "The policy remains in early stage.",
+    "The treatment is in early stages of testing.",
+    "It was useful advice.",
+    "He is in hospital for a checkup.",
+    "She went to school to meet the principal yesterday."
+  ],
+  "added_count": 10,
+  "clean_count": 1200,
+  "train_count": 1140,
+  "val_count": 60,
+  "added_file": "data/review_pack/augmentation_targeted_v6_2.jsonl"
+}

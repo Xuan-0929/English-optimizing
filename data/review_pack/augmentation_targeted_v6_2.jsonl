@@ -1,0 +1,10 @@
+{"instruction": "纠正以下句子的语法错误", "input": "The topic that discusses in school is important.", "output": "**错误类型**: 定语从句\n**改正**: The topic that is discussed in school is important.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is discussed。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The poem that reads in school is famous.", "output": "**错误类型**: 定语从句\n**改正**: The poem that is read in school is famous.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is read。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The article that teaches in class is useful.", "output": "**错误类型**: 定语从句\n**改正**: The article that is taught in class is useful.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is taught。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The law that explains in class is difficult.", "output": "**错误类型**: 定语从句\n**改正**: The law that is explained in class is difficult.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is explained。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The concept that introduces in school is practical.", "output": "**错误类型**: 定语从句\n**改正**: The concept that is introduced in school is practical.\n**解释**: 定语从句中谓语结构不完整，应补充被动结构 is introduced。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The professor which I consulted gave me advice.", "output": "**错误类型**: 定语从句\n**改正**: The professor that I consulted gave me advice.\n**解释**: 指代人且作宾语时，本项目标注规范统一使用 that。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The engineer which I consulted fixed the problem.", "output": "**错误类型**: 定语从句\n**改正**: The engineer that I consulted fixed the problem.\n**解释**: 指代人且作宾语时，本项目标注规范统一使用 that。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The lawyer which I consulted prepared the contract.", "output": "**错误类型**: 定语从句\n**改正**: The lawyer that I consulted prepared the contract.\n**解释**: 指代人且作宾语时，本项目标注规范统一使用 that。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The nurse which I consulted checked my report.", "output": "**错误类型**: 定语从句\n**改正**: The nurse that I consulted checked my report.\n**解释**: 指代人且作宾语时，本项目标注规范统一使用 that。"}
+{"instruction": "纠正以下句子的语法错误", "input": "The therapist which I consulted gave me a plan.", "output": "**错误类型**: 定语从句\n**改正**: The therapist that I consulted gave me a plan.\n**解释**: 指代人且作宾语时，本项目标注规范统一使用 that。"}
