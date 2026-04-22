@@ -1,0 +1,21 @@
+{
+  "train": {
+    "input_rows": 1140,
+    "output_rows": 1110,
+    "stats": {
+      "drop_noisy_sva": 30
+    }
+  },
+  "val": {
+    "input_rows": 60,
+    "output_rows": 59,
+    "stats": {
+      "drop_noisy_sva": 1
+    }
+  },
+  "output_files": {
+    "train": "data/processed_v6/dpo_train_v7_qc.jsonl",
+    "val": "data/processed_v6/dpo_val_v7_qc.jsonl",
+    "report": "data/processed_v6/dpo_v7_qc_report.json"
+  }
+}

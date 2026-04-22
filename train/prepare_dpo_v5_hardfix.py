@@ -14,6 +14,15 @@ import random
 from pathlib import Path
 from typing import Dict, Iterable, List, Set, Tuple
 
+REQUIRED_TRAIN_SENTENCES = {
+    "She married with him in 2018.",
+    "Clinical researches has strict ethics requirements.",
+}
+REQUIRED_VAL_SENTENCES = {
+    "She married with him in 2018.",
+    "Clinical researches has strict ethics requirements.",
+}
+
 
 def read_jsonl(path: Path) -> List[Dict]:
     rows: List[Dict] = []
@@ -63,6 +72,18 @@ def _key(row: Dict) -> Tuple[str, str, str]:
     return str(row.get("prompt", "")), str(row.get("chosen", "")), str(row.get("rejected", ""))
 
 
+def _input_from_prompt(prompt: str) -> str:
+    return prompt.split("\n", 1)[1].strip() if "\n" in prompt else prompt.strip()
+
+
+def _covered_required(rows: List[Dict], required_sentences: Set[str]) -> int:
+    return sum(
+        1
+        for s in required_sentences
+        if any(_input_from_prompt(str(r.get("prompt", ""))) == s for r in rows)
+    )
+
+
 def dedupe_new_pairs(new_rows: List[Dict], existing_rows: List[Dict]) -> List[Dict]:
     seen: Set[Tuple[str, str, str]] = {_key(r) for r in existing_rows}
     out: List[Dict] = []
@@ -73,6 +94,29 @@ def dedupe_new_pairs(new_rows: List[Dict], existing_rows: List[Dict]) -> List[Di
         seen.add(k)
         out.append(row)
     return out
+
+
+def pick_with_required(
+    pool_rows: List[Dict],
+    required_sentences: Set[str],
+    max_rows: int,
+    rng: random.Random,
+) -> List[Dict]:
+    if max_rows <= 0:
+        return []
+    required_rows: List[Dict] = []
+    optional_rows: List[Dict] = []
+    for row in pool_rows:
+        sent = _input_from_prompt(str(row.get("prompt", "")))
+        if sent in required_sentences:
+            required_rows.append(row)
+        else:
+            optional_rows.append(row)
+    rng.shuffle(required_rows)
+    rng.shuffle(optional_rows)
+    required_rows = required_rows[:max_rows]
+    remain = max_rows - len(required_rows)
+    return required_rows + optional_rows[:remain]
 
 
 def build_marry_type_pairs() -> List[Dict]:
@@ -208,8 +252,20 @@ def main() -> None:
     hardfix_all = build_hardfix_pairs()
     rng.shuffle(hardfix_all)
 
-    hardfix_train = dedupe_new_pairs(hardfix_all, train_base)[: args.max_hardfix_train]
-    hardfix_val = dedupe_new_pairs(hardfix_all, val_base)[: args.max_hardfix_val]
+    train_pool = dedupe_new_pairs(hardfix_all, train_base)
+    val_pool = dedupe_new_pairs(hardfix_all, val_base)
+    hardfix_train = pick_with_required(
+        train_pool,
+        REQUIRED_TRAIN_SENTENCES,
+        args.max_hardfix_train,
+        rng,
+    )
+    hardfix_val = pick_with_required(
+        val_pool,
+        REQUIRED_VAL_SENTENCES,
+        args.max_hardfix_val,
+        rng,
+    )
 
     merged_train = train_base + hardfix_train
     merged_val = val_base + hardfix_val
@@ -226,6 +282,8 @@ def main() -> None:
     print(f"base_val: {len(val_base)} -> merged_val: {len(merged_val)}")
     print(f"hardfix_train_added: {len(hardfix_train)}")
     print(f"hardfix_val_added: {len(hardfix_val)}")
+    print("required_train_covered_in_merged:", _covered_required(merged_train, REQUIRED_TRAIN_SENTENCES))
+    print("required_val_covered_in_merged:", _covered_required(merged_val, REQUIRED_VAL_SENTENCES))
     print(f"wrote: {args.hardfix_train_out}")
     print(f"wrote: {args.hardfix_val_out}")
     print(f"wrote: {args.merged_train_out}")
