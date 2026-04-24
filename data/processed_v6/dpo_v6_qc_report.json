@@ -1,0 +1,25 @@
+{
+  "train": {
+    "input_rows": 1485,
+    "output_rows": 1127,
+    "stats": {
+      "drop_type_only": 318,
+      "drop_noisy_sva": 37,
+      "drop_leakage": 2,
+      "drop_dup_prompt": 1
+    }
+  },
+  "val": {
+    "input_rows": 123,
+    "output_rows": 67,
+    "stats": {
+      "drop_type_only": 54,
+      "drop_noisy_sva": 2
+    }
+  },
+  "output_files": {
+    "train": "data/processed_v6/dpo_train_v6_qc.jsonl",
+    "val": "data/processed_v6/dpo_val_v6_qc.jsonl",
+    "report": "data/processed_v6/dpo_v6_qc_report.json"
+  }
+}
