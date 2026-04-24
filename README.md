@@ -157,7 +157,19 @@ python3 train/prepare_dpo_v5_hardfix.py \
 python3 scripts/evaluation/evaluate_lora.py \
   --test-file data/processed_v6/sft_eval_benchmark_v1.jsonl \
   --lora-path outputs/your_run/final \
+  --apply-type-constraints \
   --output result/your_run/eval_compare.json
+```
+
+### 5.6 扩展评估集（challenge + ood）
+
+```bash
+python3 train/build_eval_suites.py \
+  --input-clean data/processed_v6/sft_train_clean_v6.jsonl \
+  --benchmark data/processed_v6/sft_eval_benchmark_v1.jsonl \
+  --challenge-out data/processed_v6/sft_eval_challenge_type_v1.jsonl \
+  --ood-out data/processed_v6/sft_eval_ood_general_v1.jsonl \
+  --report-out data/processed_v6/sft_eval_suites_report_v1.json
 ```
 
 ## 6. 项目目录

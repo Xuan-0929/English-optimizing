@@ -5,14 +5,22 @@
 # 2. 运行程序后按照提示进行交互式语法纠错练习
 
 import os
+import re
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import PeftModel
 import gradio as gr
 
+try:
+    from scripts.evaluation.type_constraints import apply_type_constraints
+except ModuleNotFoundError:
+    apply_type_constraints = None
+
 # 配置参数
 MODEL_PATH = "./models/Qwen2.5-3B-Instruct"  # 基础模型路径
 LORA_PATH = "./train/sft_model"  # LoRA模型路径
+ERROR_TYPE_RE = re.compile(r"(\*\*错误类型\*\*:\s*)(.+?)(\n)")
+CORRECTION_RE = re.compile(r"\*\*改正\*\*:\s*(.+?)\n", re.S)
 
 def load_local_model():
     """加载本地训练的模型"""
@@ -84,14 +92,15 @@ def generate_correction(model, tokenizer, user_sentence):
     # 解码输出
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
-    # 提取纠错结果
-    if "**改正**" in generated_text:
-        correction = generated_text.split("**改正**")[1].split("\n")[0].strip()
-        if correction.startswith(":"):
-            correction = correction[1:].strip()
-    else:
-        correction = generated_text[len(prompt):].strip()
-    
+    if apply_type_constraints is not None:
+        m_corr = CORRECTION_RE.search(generated_text)
+        m_type = ERROR_TYPE_RE.search(generated_text)
+        if m_corr and m_type:
+            correction = m_corr.group(1).strip()
+            pred_type = m_type.group(2).strip()
+            final_type, _ = apply_type_constraints(user_sentence, correction, pred_type)
+            if final_type != pred_type:
+                generated_text = ERROR_TYPE_RE.sub(rf"\1{final_type}\3", generated_text, count=1)
     return generated_text
 
 def evaluate_correction(user_sentence, model_output):

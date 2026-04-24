@@ -8,6 +8,10 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+try:
+    from scripts.evaluation.type_constraints import apply_type_constraints
+except ModuleNotFoundError:
+    from type_constraints import apply_type_constraints
 
 DEFAULT_TEST_CASES = [
     "He said he goes to the store yesterday.",
@@ -255,6 +259,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--test-file", default=None, help="Optional .txt or .jsonl file.")
     p.add_argument("--output", default="outputs/sft_v1/eval_compare.json", help="Output JSON path.")
     p.add_argument("--max-new-tokens", type=int, default=220)
+    p.add_argument(
+        "--apply-type-constraints",
+        action="store_true",
+        help="Apply deterministic post-processing constraints on predicted error type.",
+    )
     return p
 
 
@@ -281,7 +290,11 @@ def main() -> None:
         lora_raw = generate_reply(lora_model, lora_tok, sentence, args.max_new_tokens)
         base_corr = extract_correction(base_raw)
         lora_corr = extract_correction(lora_raw)
-        lora_type = extract_error_type(lora_raw)
+        lora_type_raw = extract_error_type(lora_raw)
+        lora_type = lora_type_raw
+        applied_rule = None
+        if args.apply_type_constraints:
+            lora_type, applied_rule = apply_type_constraints(sentence, lora_corr, lora_type_raw)
 
         row = {
             "id": idx,
@@ -292,7 +305,9 @@ def main() -> None:
             "lora_output": lora_raw,
             "base_correction": base_corr,
             "lora_correction": lora_corr,
+            "lora_type_raw": lora_type_raw,
             "lora_type": lora_type,
+            "lora_type_constraint_rule": applied_rule,
             "base_correction_exact": None,
             "lora_correction_exact": None,
             "lora_type_exact": None,
