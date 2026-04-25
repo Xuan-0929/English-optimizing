@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Optional, Tuple
 
 
@@ -19,8 +20,11 @@ def _is_marry_with_fix(user_input: str, correction: str) -> bool:
 def _is_reported_speech_will_to_would(user_input: str, correction: str) -> bool:
     src = _norm(user_input)
     corr = _norm(correction)
-    reporting_markers = ("he said", "she said", "they said", "i said", "we said", "told me", "told us", "told him", "told her")
-    has_reporting = any(m in src for m in reporting_markers)
+    # Cover common reported-speech patterns:
+    # - "He said ... will ..."
+    # - "He said that ... will ..."
+    # - "She told me ... will ..."
+    has_reporting = re.search(r"\b(said|told)\b", src) is not None
     return has_reporting and " will " in f" {src} " and " would " in f" {corr} "
 
 
