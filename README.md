@@ -161,6 +161,10 @@ python3 scripts/evaluation/evaluate_lora.py \
   --output result/your_run/eval_compare.json
 ```
 
+说明：
+- 评估输出 `summary` 中同时包含严格指标与宽松指标：`base/lora_correction_relaxed_exact_rate`。
+- 宽松指标会对少量等价表达做归一（如 `it's/it is`、`who/that`、`topic/subject`）。
+
 ### 5.6 扩展评估集（challenge + ood）
 
 ```bash
@@ -170,6 +174,16 @@ python3 train/build_eval_suites.py \
   --challenge-out data/processed_v6/sft_eval_challenge_type_v1.jsonl \
   --ood-out data/processed_v6/sft_eval_ood_general_v1.jsonl \
   --report-out data/processed_v6/sft_eval_suites_report_v1.json
+```
+
+### 5.7 噪声鲁棒评估集
+
+```bash
+python3 scripts/evaluation/evaluate_lora.py \
+  --test-file data/processed_v6/sft_eval_noise_robust_v1.jsonl \
+  --lora-path outputs/your_run/final \
+  --apply-type-constraints \
+  --output result/your_run/noise_robust_eval_compare.json
 ```
 
 ## 6. 项目目录

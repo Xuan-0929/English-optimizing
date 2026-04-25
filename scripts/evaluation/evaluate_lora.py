@@ -28,6 +28,15 @@ CORRECTION_RE = re.compile(r"\*\*改正\*\*:\s*(.+?)\n")
 EXPLANATION_RE = re.compile(r"\*\*解释\*\*:\s*(.+)$", re.DOTALL)
 QUOTE_SENT_RE = re.compile(r'"([^"]+)"')
 WS_RE = re.compile(r"\s+")
+PUNCT_WS_RE = re.compile(r"\s+([,.;:!?])")
+
+
+RELAXED_TOKEN_MAP = [
+    (re.compile(r"\bit's\b"), "it is"),
+    (re.compile(r"\bwho\b"), "<rel_pron>"),
+    (re.compile(r"\bthat\b"), "<rel_pron>"),
+    (re.compile(r"\btopic\b"), "subject"),
+]
 
 
 def _ensure_torch_set_submodule() -> None:
@@ -142,6 +151,15 @@ def normalize_text(s: str) -> str:
     return s.strip(" .;:")
 
 
+def normalize_text_relaxed(s: str) -> str:
+    s = normalize_text(s)
+    for pat, rep in RELAXED_TOKEN_MAP:
+        s = pat.sub(rep, s)
+    s = PUNCT_WS_RE.sub(r"\1", s)
+    s = WS_RE.sub(" ", s)
+    return s.strip(" .;:")
+
+
 def extract_correction(raw_output: str) -> str:
     parsed = parse_sft_output(raw_output)
     if parsed:
@@ -222,6 +240,8 @@ def summarize_scores(items: List[Dict]) -> Dict:
     total = len(scored)
     base_corr = sum(1 for x in scored if x["base_correction_exact"])
     lora_corr = sum(1 for x in scored if x["lora_correction_exact"])
+    base_corr_relaxed = sum(1 for x in scored if x["base_correction_relaxed_exact"])
+    lora_corr_relaxed = sum(1 for x in scored if x["lora_correction_relaxed_exact"])
     lora_type_total = sum(1 for x in scored if x.get("gold_type"))
     lora_type_ok = sum(1 for x in scored if x.get("gold_type") and x["lora_type_exact"])
 
@@ -247,6 +267,8 @@ def summarize_scores(items: List[Dict]) -> Dict:
         "scored_items": total,
         "base_correction_exact_rate": round(base_corr / total, 4),
         "lora_correction_exact_rate": round(lora_corr / total, 4),
+        "base_correction_relaxed_exact_rate": round(base_corr_relaxed / total, 4),
+        "lora_correction_relaxed_exact_rate": round(lora_corr_relaxed / total, 4),
         "lora_type_exact_rate": round(lora_type_ok / max(1, lora_type_total), 4),
         "by_type": by_type_rate,
     }
@@ -310,13 +332,18 @@ def main() -> None:
             "lora_type_constraint_rule": applied_rule,
             "base_correction_exact": None,
             "lora_correction_exact": None,
+            "base_correction_relaxed_exact": None,
+            "lora_correction_relaxed_exact": None,
             "lora_type_exact": None,
         }
 
         if gold_correction:
             gold_norm = normalize_text(gold_correction)
+            gold_relaxed_norm = normalize_text_relaxed(gold_correction)
             row["base_correction_exact"] = normalize_text(base_corr) == gold_norm
             row["lora_correction_exact"] = normalize_text(lora_corr) == gold_norm
+            row["base_correction_relaxed_exact"] = normalize_text_relaxed(base_corr) == gold_relaxed_norm
+            row["lora_correction_relaxed_exact"] = normalize_text_relaxed(lora_corr) == gold_relaxed_norm
         if gold_type:
             row["lora_type_exact"] = normalize_text(lora_type) == normalize_text(gold_type)
 
