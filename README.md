@@ -1,6 +1,6 @@
 # 英语语法纠错优化项目（SFT + DPO）
 
-> 最后更新：2026-04-22
+> 最后更新：2026-04-26
 
 ## 1. 项目目标
 
@@ -34,6 +34,8 @@
 - `data/processed_v6/sft_eval_benchmark_v1.jsonl`: 60（固定评估集）
 - `data/processed_v6/dpo_train_v7.jsonl`: 1130
 - `data/processed_v6/dpo_val_v7.jsonl`: 67
+- `data/processed_v6/dpo_train_v7_4.jsonl`: 1207
+- `data/processed_v6/dpo_val_v7_4.jsonl`: 85
 
 ### 2.2 训练流程
 
@@ -47,6 +49,8 @@
   - `train/prepare_dpo_v4_targeted.py`
   - `train/prepare_dpo_type_consistency.py`
   - `train/prepare_dpo_type_focus_v3.py`
+  - `train/prepare_dpo_v7_3_error_driven.py`
+  - `train/prepare_dpo_v7_4_tense_precision.py`
 
 ### 2.3 评估与分析
 
@@ -71,10 +75,13 @@
 固定 60 条评测集上的结果：
 - `dpo_v1`: `lora_correction_exact_rate = 1.0000`，`lora_type_exact_rate = 0.9833`
 - `dpo_v2 ~ dpo_v5_qc`: `lora_correction_exact_rate = 0.9833`，`lora_type_exact_rate = 0.9833`
+- `dpo_v7_2_constraint`: benchmark/challenge 均达到 `1.0000` correction/type；OOD `correction_exact_rate = 0.9727`，noise robust `type_exact_rate = 0.9000`
+- `dpo_v7_3`: benchmark `correction_exact_rate = 1.0000`、`type_exact_rate = 1.0000`；noise robust `type_exact_rate = 1.0000`
 
 结论：
 - DPO 路线总体稳定，`correction exact rate` 维持在高位（0.9833~1.0000）
 - 质量清洗后（`v5_qc`）训练损失显著下降（`eval_loss` 0.1813 -> 0.0489），效果保持稳定
+- v7.3 通过误差驱动 hardfix 修复了 noise robust 的时态类型误判；v7.4 已准备时态精度增强数据，等待训练与评估闭环
 
 ### 3.3 阶段性结论
 
@@ -151,7 +158,41 @@ python3 train/prepare_dpo_v5_hardfix.py \
   --merged-val-out data/processed_v6/dpo_val_v7.jsonl
 ```
 
-### 5.5 评估
+### 5.5 DPO v7.3/v7.4 增强数据
+
+v7.3 从 OOD 与 noise robust 评估结果中抽取真实误差，生成误差驱动 hardfix：
+
+```bash
+python3 train/prepare_dpo_v7_3_error_driven.py
+```
+
+当前产物：
+- `data/processed_v6/dpo_train_v7_3.jsonl`: 1198
+- `data/processed_v6/dpo_val_v7_3.jsonl`: 79
+
+v7.4 在 v7.3 基础上补充时态精度 hardfix，覆盖转述时态、虚拟条件句和 `since` 持续状态表达：
+
+```bash
+python3 train/prepare_dpo_v7_4_tense_precision.py
+```
+
+当前产物：
+- `data/processed_v6/dpo_hardfix_train_v7_4.jsonl`: 9
+- `data/processed_v6/dpo_hardfix_val_v7_4.jsonl`: 6
+- `data/processed_v6/dpo_train_v7_4.jsonl`: 1207
+- `data/processed_v6/dpo_val_v7_4.jsonl`: 85
+
+建议下一步训练命令：
+
+```bash
+python3 train/train_dpo.py \
+  --sft-adapter-path outputs/sft_v6_3/final \
+  --train-data data/processed_v6/dpo_train_v7_4.jsonl \
+  --val-data data/processed_v6/dpo_val_v7_4.jsonl \
+  --output-dir outputs/dpo_v7_4
+```
+
+### 5.6 评估
 
 ```bash
 python3 scripts/evaluation/evaluate_lora.py \
@@ -165,7 +206,7 @@ python3 scripts/evaluation/evaluate_lora.py \
 - 评估输出 `summary` 中同时包含严格指标与宽松指标：`base/lora_correction_relaxed_exact_rate`。
 - 宽松指标会对少量等价表达做归一（如 `it's/it is`、`who/that`、`topic/subject`）。
 
-### 5.6 扩展评估集（challenge + ood）
+### 5.7 扩展评估集（challenge + ood）
 
 ```bash
 python3 train/build_eval_suites.py \
@@ -176,7 +217,7 @@ python3 train/build_eval_suites.py \
   --report-out data/processed_v6/sft_eval_suites_report_v1.json
 ```
 
-### 5.7 噪声鲁棒评估集
+### 5.8 噪声鲁棒评估集
 
 ```bash
 python3 scripts/evaluation/evaluate_lora.py \
@@ -206,6 +247,6 @@ English-optimizing/
 
 ## 7. 下一步计划
 
-1. 针对当前非满分类型（如介词细粒度变体）做 targeted 增强。
-2. 增加人工复核集与误差归因报告（按错误类型、句法长度、领域拆分）。
-3. 在固定 benchmark 之外补充 out-of-domain 集，验证泛化能力。
+1. 训练 `dpo_v7_4`，并在 benchmark / challenge / OOD / noise robust 四套评估集上复测。
+2. 针对 OOD 中仍非满分的介词、时态、定语从句细粒度变体做 targeted 增强。
+3. 增加人工复核集与误差归因报告（按错误类型、句法长度、领域拆分）。
