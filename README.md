@@ -62,6 +62,7 @@
 - 分类型指标统计（`by_type`）
 - 数据与结果分析脚本（`scripts/evaluation/analyze_dataset.py` / `compare_base_vs_lora.py`）
 - 多轮实验结果沉淀到 `result/`
+- 最小推理 CLI（`scripts/inference/grammar_correct.py`），用于单句或批量语法纠错交付
 
 ## 3. 当前进度与结果
 
@@ -252,6 +253,36 @@ python3 scripts/evaluation/postprocess_eval_constraints.py \
 ```
 
 交付指标见 `result/dpo_delivery_v1/summary.json` 与 `docs/dpo_delivery_v1_report.md`。
+
+### 5.6.2 推理 CLI
+
+单句推理：
+
+```bash
+python3 scripts/inference/grammar_correct.py \
+  --sentence "She told me she will be going to the store." \
+  --lora-path outputs/dpo_v7_4/final
+```
+
+JSON 输出：
+
+```bash
+python3 scripts/inference/grammar_correct.py \
+  --sentence "She told me she will be going to the store." \
+  --lora-path outputs/dpo_v7_4/final \
+  --json
+```
+
+批量推理：
+
+```bash
+python3 scripts/inference/grammar_correct.py \
+  --input-file input.jsonl \
+  --output predictions.jsonl \
+  --lora-path outputs/dpo_v7_4/final
+```
+
+详细说明见 `docs/inference_cli.md`。
 
 ### 5.7 扩展评估集（challenge + ood）
 
