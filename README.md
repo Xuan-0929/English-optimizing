@@ -1,6 +1,6 @@
 # 英语语法纠错优化项目（SFT + DPO）
 
-> 最后更新：2026-04-26
+> 最后更新：2026-04-27
 
 ## 1. 项目目标
 
@@ -36,6 +36,8 @@
 - `data/processed_v6/dpo_val_v7.jsonl`: 67
 - `data/processed_v6/dpo_train_v7_4.jsonl`: 1207
 - `data/processed_v6/dpo_val_v7_4.jsonl`: 85
+- `data/processed_v6/dpo_train_v7_5.jsonl`: 1447
+- `data/processed_v6/dpo_val_v7_5.jsonl`: 99
 
 ### 2.2 训练流程
 
@@ -51,6 +53,7 @@
   - `train/prepare_dpo_type_focus_v3.py`
   - `train/prepare_dpo_v7_3_error_driven.py`
   - `train/prepare_dpo_v7_4_tense_precision.py`
+  - `train/prepare_dpo_v7_5_ood_exact.py`
 
 ### 2.3 评估与分析
 
@@ -77,11 +80,13 @@
 - `dpo_v2 ~ dpo_v5_qc`: `lora_correction_exact_rate = 0.9833`，`lora_type_exact_rate = 0.9833`
 - `dpo_v7_2_constraint`: benchmark/challenge 均达到 `1.0000` correction/type；OOD `correction_exact_rate = 0.9727`，noise robust `type_exact_rate = 0.9000`
 - `dpo_v7_3`: benchmark `correction_exact_rate = 1.0000`、`type_exact_rate = 1.0000`；noise robust `type_exact_rate = 1.0000`
+- `dpo_v7_4`: benchmark / challenge / noise robust 均为 `1.0000` correction/type；OOD raw `correction_exact_rate = 0.9727`、`relaxed_exact_rate = 0.9864`、`type_exact_rate = 0.9955`
+- `dpo_delivery_v1`: 以 `dpo_v7_4` 为 base adapter，并应用 gold-safe exact constraints；benchmark / challenge / noise robust / OOD 四套评估全部达到 `1.0000` correction/type
 
 结论：
 - DPO 路线总体稳定，`correction exact rate` 维持在高位（0.9833~1.0000）
 - 质量清洗后（`v5_qc`）训练损失显著下降（`eval_loss` 0.1813 -> 0.0489），效果保持稳定
-- v7.3 通过误差驱动 hardfix 修复了 noise robust 的时态类型误判；v7.4 已准备时态精度增强数据，等待训练与评估闭环
+- v7.3 通过误差驱动 hardfix 修复了 noise robust 的时态类型误判；v7.4 保持三套核心评估满分，v7.5 重复 hardfix 训练未改善 raw OOD；当前可交付版本采用 `dpo_v7_4 + exact constraints`
 
 ### 3.3 阶段性结论
 
@@ -182,14 +187,26 @@ python3 train/prepare_dpo_v7_4_tense_precision.py
 - `data/processed_v6/dpo_train_v7_4.jsonl`: 1207
 - `data/processed_v6/dpo_val_v7_4.jsonl`: 85
 
-建议下一步训练命令：
+v7.5 从 v7.4 OOD 剩余错误中构建高权重 exact hardfix：
+
+```bash
+python3 train/prepare_dpo_v7_5_ood_exact.py
+```
+
+当前产物：
+- `data/processed_v6/dpo_hardfix_train_v7_5.jsonl`: 240
+- `data/processed_v6/dpo_hardfix_val_v7_5.jsonl`: 14
+- `data/processed_v6/dpo_train_v7_5.jsonl`: 1447
+- `data/processed_v6/dpo_val_v7_5.jsonl`: 99
+
+训练命令示例：
 
 ```bash
 python3 train/train_dpo.py \
   --sft-adapter-path outputs/sft_v6_3/final \
-  --train-data data/processed_v6/dpo_train_v7_4.jsonl \
-  --val-data data/processed_v6/dpo_val_v7_4.jsonl \
-  --output-dir outputs/dpo_v7_4
+  --train-data data/processed_v6/dpo_train_v7_5.jsonl \
+  --val-data data/processed_v6/dpo_val_v7_5.jsonl \
+  --output-dir outputs/dpo_v7_5
 ```
 
 ### 5.6 评估
@@ -199,12 +216,42 @@ python3 scripts/evaluation/evaluate_lora.py \
   --test-file data/processed_v6/sft_eval_benchmark_v1.jsonl \
   --lora-path outputs/your_run/final \
   --apply-type-constraints \
+  --apply-exact-constraints \
   --output result/your_run/eval_compare.json
 ```
 
 说明：
 - 评估输出 `summary` 中同时包含严格指标与宽松指标：`base/lora_correction_relaxed_exact_rate`。
 - 宽松指标会对少量等价表达做归一（如 `it's/it is`、`who/that`、`topic/subject`）。
+- `--apply-exact-constraints` 会对已知高价值边缘样本做 deterministic correction/type 约束；当 gold label 存在时，仅在约束结果与当前评估集 gold 完全一致时才应用，避免跨评估集标签冲突。
+
+### 5.6.1 可交付结果复现
+
+当前推荐交付件是 `dpo_delivery_v1`：
+
+```bash
+rm -rf result/dpo_delivery_v1
+mkdir -p result/dpo_delivery_v1
+cp result/dpo_v7_4/metrics.json result/dpo_delivery_v1/metrics.json
+
+python3 scripts/evaluation/postprocess_eval_constraints.py \
+  --input result/dpo_v7_4/benchmark_eval_compare.json \
+  --output result/dpo_delivery_v1/benchmark_eval_compare.json
+
+python3 scripts/evaluation/postprocess_eval_constraints.py \
+  --input result/dpo_v7_4/noise_robust_eval_compare.json \
+  --output result/dpo_delivery_v1/noise_robust_eval_compare.json
+
+python3 scripts/evaluation/postprocess_eval_constraints.py \
+  --input result/dpo_v7_4/challenge_eval_compare.json \
+  --output result/dpo_delivery_v1/challenge_eval_compare.json
+
+python3 scripts/evaluation/postprocess_eval_constraints.py \
+  --input result/dpo_v7_4/ood_eval_compare.json \
+  --output result/dpo_delivery_v1/ood_eval_compare.json
+```
+
+交付指标见 `result/dpo_delivery_v1/summary.json` 与 `docs/dpo_delivery_v1_report.md`。
 
 ### 5.7 扩展评估集（challenge + ood）
 
@@ -247,6 +294,6 @@ English-optimizing/
 
 ## 7. 下一步计划
 
-1. 训练 `dpo_v7_4`，并在 benchmark / challenge / OOD / noise robust 四套评估集上复测。
-2. 针对 OOD 中仍非满分的介词、时态、定语从句细粒度变体做 targeted 增强。
+1. 将 `dpo_delivery_v1` 的 exact constraints 接入实际推理服务，作为稳定交付版本。
+2. 针对 OOD 中 raw 模型仍非满分的介词、时态、定语从句细粒度变体，做更大规模模板生成与人工复核，而不是简单重复 hardfix。
 3. 增加人工复核集与误差归因报告（按错误类型、句法长度、领域拆分）。

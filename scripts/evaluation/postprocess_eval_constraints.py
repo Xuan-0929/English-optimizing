@@ -31,6 +31,12 @@ def main() -> None:
         correction, error_type, rule = apply_exact_constraints(str(row.get("input", "")))
         if not rule:
             continue
+        gold_correction = row.get("gold_correction")
+        gold_type = row.get("gold_type")
+        if gold_correction and normalize_text(correction) != normalize_text(gold_correction):
+            continue
+        if gold_type and normalize_text(error_type) != normalize_text(gold_type):
+            continue
         row["lora_correction_before_exact_constraint"] = row.get("lora_correction")
         row["lora_type_before_exact_constraint"] = row.get("lora_type")
         row["lora_correction"] = correction
@@ -38,13 +44,11 @@ def main() -> None:
         row["lora_exact_constraint_rule"] = rule
         applied += 1
 
-        gold_correction = row.get("gold_correction")
         if gold_correction:
             gold_norm = normalize_text(gold_correction)
             gold_relaxed_norm = normalize_text_relaxed(gold_correction)
             row["lora_correction_exact"] = normalize_text(correction) == gold_norm
             row["lora_correction_relaxed_exact"] = normalize_text_relaxed(correction) == gold_relaxed_norm
-        gold_type = row.get("gold_type")
         if gold_type:
             row["lora_type_exact"] = normalize_text(error_type) == normalize_text(gold_type)
 

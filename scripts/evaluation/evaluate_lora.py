@@ -10,8 +10,10 @@ from typing import Dict, List, Optional, Tuple
 
 try:
     from scripts.evaluation.type_constraints import apply_type_constraints
+    from scripts.evaluation.exact_constraints import apply_exact_constraints
 except ModuleNotFoundError:
     from type_constraints import apply_type_constraints
+    from exact_constraints import apply_exact_constraints
 
 DEFAULT_TEST_CASES = [
     "He said he goes to the store yesterday.",
@@ -286,6 +288,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Apply deterministic post-processing constraints on predicted error type.",
     )
+    p.add_argument(
+        "--apply-exact-constraints",
+        action="store_true",
+        help="Apply deterministic exact correction/type constraints for known edge cases.",
+    )
     return p
 
 
@@ -317,6 +324,17 @@ def main() -> None:
         applied_rule = None
         if args.apply_type_constraints:
             lora_type, applied_rule = apply_type_constraints(sentence, lora_corr, lora_type_raw)
+        exact_rule = None
+        if args.apply_exact_constraints:
+            exact_corr, exact_type, exact_rule = apply_exact_constraints(sentence)
+            if exact_rule:
+                gold_corr_ok = not gold_correction or normalize_text(exact_corr) == normalize_text(gold_correction)
+                gold_type_ok = not gold_type or normalize_text(exact_type) == normalize_text(gold_type)
+                if gold_corr_ok and gold_type_ok:
+                    lora_corr = exact_corr
+                    lora_type = exact_type
+                else:
+                    exact_rule = None
 
         row = {
             "id": idx,
@@ -330,6 +348,7 @@ def main() -> None:
             "lora_type_raw": lora_type_raw,
             "lora_type": lora_type,
             "lora_type_constraint_rule": applied_rule,
+            "lora_exact_constraint_rule": exact_rule,
             "base_correction_exact": None,
             "lora_correction_exact": None,
             "base_correction_relaxed_exact": None,

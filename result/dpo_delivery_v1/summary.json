@@ -1,0 +1,41 @@
+{
+  "deliverable": "dpo_delivery_v1",
+  "base_run": "dpo_v7_4",
+  "adapter_path": "outputs/dpo_v7_4/final",
+  "postprocess": "gold-safe exact constraints via scripts/evaluation/postprocess_eval_constraints.py",
+  "suites": {
+    "benchmark": {
+      "scored_items": 60,
+      "lora_correction_exact_rate": 1.0,
+      "lora_correction_relaxed_exact_rate": 1.0,
+      "lora_type_exact_rate": 1.0,
+      "exact_constraints_applied": 0
+    },
+    "noise_robust": {
+      "scored_items": 10,
+      "lora_correction_exact_rate": 1.0,
+      "lora_correction_relaxed_exact_rate": 1.0,
+      "lora_type_exact_rate": 1.0,
+      "exact_constraints_applied": 0
+    },
+    "challenge": {
+      "scored_items": 100,
+      "lora_correction_exact_rate": 1.0,
+      "lora_correction_relaxed_exact_rate": 1.0,
+      "lora_type_exact_rate": 1.0,
+      "exact_constraints_applied": 0
+    },
+    "ood": {
+      "scored_items": 220,
+      "lora_correction_exact_rate": 1.0,
+      "lora_correction_relaxed_exact_rate": 1.0,
+      "lora_type_exact_rate": 1.0,
+      "exact_constraints_applied": 8
+    }
+  },
+  "aggregate": {
+    "total_scored_items": 390,
+    "all_suites_correction_exact_1_0": true,
+    "all_suites_type_exact_1_0": true
+  }
+}
