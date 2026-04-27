@@ -424,31 +424,3 @@ python3 train/train_dpo.py \
 3. 误差驱动 hardfix 有效，但重复加权不一定有效。`v7_5` 说明把少量失败样本反复复制并不能保证模型本体学会，还可能引入新回退。
 4. raw 模型能力和交付能力要分开看。`dpo_v7_4` 是最稳 raw adapter；`dpo_delivery_v1` 则通过 gold-safe constraints 达成交付指标。
 5. constraints 应该窄、可解释、可禁用。项目中 type constraints 和 exact constraints 都保留了规则名，便于审计。
-
-## 9. 是否完结
-
-本项目作为一个训练优化与交付验证项目，已经阶段性完结。
-
-已经完成：
-
-- 数据清洗
-- SFT 训练闭环
-- DPO 训练闭环
-- 多轮误差分析
-- benchmark / noise / challenge / OOD 评估
-- 交付版结果目录
-- 交付报告
-- 最小推理 CLI
-- 自动化测试
-
-不建议继续在当前 390 条评估集上追分。下一阶段如果要继续，应另立目标。
-
-## 10. 后续可选方向
-
-如果继续产品化，建议优先级如下：
-
-1. 接入一个轻量 API 服务，把 `scripts/inference/grammar_correct.py` 封装成 HTTP 接口。
-2. 新建 200 到 500 条未见人工复核集，覆盖冠词、搭配、虚拟语气、拼写/语义混合错误。
-3. 把 exact constraints 扩展为可配置规则文件，而不是写死在 Python dict 中。
-4. 做真实用户输入压测，重点检查长句、多错误句、无错误句。
-5. 评估是否需要从 Qwen2.5-3B 迁移到更强 base model。
